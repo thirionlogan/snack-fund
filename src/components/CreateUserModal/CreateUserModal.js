@@ -1,13 +1,11 @@
 import React from 'react';
 import { Button, Paper, Modal, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
 import SaveIcon from '@material-ui/icons/Save';
 
 import PropTypes from 'prop-types';
 CreateUserModal.propTypes = {
   open: PropTypes.bool.isRequired,
-  handleOpen: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 
@@ -29,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   textField: { margin: theme.spacing(1) },
 }));
 
-function CreateUserModal({ open, handleOpen, handleClose }) {
+function CreateUserModal({ open, handleClose }) {
   const classes = useStyles();
 
   return (
