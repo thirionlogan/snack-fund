@@ -1,14 +1,20 @@
 import React from 'react';
-import { Button, Paper, Modal, TextField } from '@material-ui/core';
+import {
+  Button,
+  Paper,
+  Modal,
+  TextField,
+  InputAdornment,
+  Typography,
+  Icon,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
-import SaveIcon from '@material-ui/icons/Save';
-
 import PropTypes from 'prop-types';
+
 CreateTransactionModal.propTypes = {
   open: PropTypes.bool.isRequired,
-  handleOpen: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
+  user: PropTypes.object,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
     width: 400,
-    // backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -29,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   textField: { margin: theme.spacing(1) },
 }));
 
-function CreateTransactionModal({ open, handleOpen, handleClose, user }) {
+function CreateTransactionModal({ open, handleClose, user }) {
   const classes = useStyles();
 
   return (
@@ -40,27 +45,14 @@ function CreateTransactionModal({ open, handleOpen, handleClose, user }) {
       aria-describedby='simple-modal-description'
     >
       <Paper className={classes.paper}>
-        <h2 id='simple-modal-title'>Add User</h2>
-        <div>
-          <TextField
-            label='Rank'
-            variant='filled'
-            className={classes.textField}
-          />
-          <TextField
-            label='Name'
-            variant='filled'
-            className={classes.textField}
-          />
-        </div>
-        <Button
-          variant='contained'
-          color='primary'
-          size='large'
-          className={classes.button}
-          startIcon={<SaveIcon />}
-        >
-          Save
+        <Typography>You have ${(user.balance / 100).toFixed(2)}</Typography>
+        <TextField
+          InputProps={{
+            startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+          }}
+        />
+        <Button variant='contained' color='primary' endIcon={<Icon>send</Icon>}>
+          Send Transaction
         </Button>
       </Paper>
     </Modal>

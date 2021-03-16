@@ -4,6 +4,7 @@ import { Button, Paper, InputBase } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import CreateUserModal from './components/CreateUserModal/CreateUserModal';
+import CreateTransactionModal from './components/CreateTransactionModal/CreateTransactionModal';
 import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [users, setUsers] = useState([
-    { id: 1, rank: 'SrA', name: 'Thirion' },
-    { id: 2, rank: 'SrA', name: 'Shaw' },
-    { id: 3, rank: 'SSgt', name: 'Monroe' },
-    { id: 4, rank: 'TSgt', name: 'Drevon' },
-    { id: 5, rank: 'A1C', name: 'Wilson' },
-    { id: 6, rank: 'TSgt', name: 'Messler' },
+    { id: 1, rank: 'SrA', name: 'Thirion', balance: 1025 },
+    { id: 2, rank: 'SrA', name: 'Shaw', balance: 1000 },
+    { id: 3, rank: 'SSgt', name: 'Monroe', balance: 1000 },
+    { id: 4, rank: 'TSgt', name: 'Drevon', balance: -1000 },
+    { id: 5, rank: 'A1C', name: 'Wilson', balance: 1000 },
+    { id: 6, rank: 'TSgt', name: 'Messler', balance: 1000 },
   ]);
   const [search, setSearch] = useState('');
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
@@ -42,6 +43,16 @@ function App() {
 
   const handleCloseCreateUserModal = () => {
     setOpenCreateUserModal(false);
+  };
+
+  const handlesetOpenCreateTransactionModal = (user) => {
+    setOpenCreateTransactionModal(true);
+    setSelectedUser(user);
+  };
+
+  const handleCloseCreateTransactionModal = () => {
+    setOpenCreateTransactionModal(false);
+    setSelectedUser({});
   };
 
   const handleSearch = (e) => {
@@ -86,6 +97,7 @@ function App() {
               variant='contained'
               color='primary'
               className={classes.button}
+              onClick={() => handlesetOpenCreateTransactionModal(user)}
             >
               {user.rank + ' ' + user.name}
             </Button>
@@ -93,7 +105,11 @@ function App() {
         <CreateUserModal
           open={openCreateUserModal}
           handleClose={handleCloseCreateUserModal}
-          handleOpen={handleOpenCreateUserModal}
+        />
+        <CreateTransactionModal
+          open={openCreateTransactionModal}
+          handleClose={handleCloseCreateTransactionModal}
+          user={selectedUser}
         />
       </header>
     </div>
