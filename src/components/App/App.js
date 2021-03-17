@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, InputBase } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
-import CreateUserModal from './components/CreateUserModal/CreateUserModal';
-import CreateTransactionModal from './components/CreateTransactionModal/CreateTransactionModal';
-import { useState } from 'react';
+import CreateUserModal from '../CreateUserModal/CreateUserModal';
+import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
 
 const useStyles = makeStyles((theme) => ({
   button: {

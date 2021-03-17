@@ -1,5 +1,5 @@
-exports.up = (knex) => {
-  return knex.schema
+exports.up = (knex) =>
+  knex.schema
     .createTable('user', (table) => {
       table.increments();
       table.string('rank').notNullable();
@@ -12,8 +12,6 @@ exports.up = (knex) => {
       table.integer('user_id').references('user.id').onDelete('CASCADE');
       table.timestamps(true, true);
     });
-};
 
-exports.down = (knex) => {
-  return knex.schema.dropTableIfExists('transaction').dropTableIfExists('user');
-};
+exports.down = (knex) =>
+  knex.schema.dropTableIfExists('transaction').dropTableIfExists('user');

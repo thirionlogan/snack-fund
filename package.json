@@ -45,7 +45,7 @@
     "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.1",
-    "knex": "^0.95.1",
+    "knex": "^0.95.2",
     "mini-css-extract-plugin": "0.11.3",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
@@ -100,7 +100,8 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/src",
+      "<rootDir>/server"
     ],
     "collectCoverage": true,
     "coverageThreshold": {
@@ -113,7 +114,10 @@
     },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "!src/**/*.d.ts",
+      "server/**/*.{js,jsx,ts,tsx}",
+      "!server/**/*.d.ts",
+      "!server/data/**/*.js"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
@@ -123,7 +127,9 @@
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
+      "<rootDir>/server/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/server/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
     "testRunner": "<rootDir>/node_modules/jest-circus/runner.js",
@@ -163,5 +169,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "supertest": "^6.1.3"
   }
 }

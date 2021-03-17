@@ -1,23 +1,52 @@
 require('dotenv').config({ path: '../.env' });
-
-const localfile = {
-  client: 'sqlite3',
-  connection: {
-    filename: './mydb.sqlite',
-  },
-  useNullAsDefault: true,
-  migrations: {
-    directory: './data/migrations',
-  },
-  seeds: { directory: './data/seeds' },
-};
+const path = require('path');
 
 module.exports = {
-  development: localfile,
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './mydb.sqlite',
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: { directory: './data/seeds' },
+  },
   test: {
-    ...localfile,
+    ...{
+      client: 'sqlite3',
+      connection: {
+        filename: './mydb.sqlite',
+      },
+      useNullAsDefault: true,
+      migrations: {
+        directory: './server/data/migrations',
+      },
+      seeds: { directory: './server/data/seeds' },
+    },
     connection: ':memory:',
   },
-  staging: localfile,
-  production: localfile,
+  staging: {
+    client: 'sqlite3',
+    connection: {
+      filename: './mydb.sqlite',
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: { directory: './data/seeds' },
+  },
+  production: {
+    client: 'sqlite3',
+    connection: {
+      filename: './mydb.sqlite',
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: { directory: './data/seeds' },
+  },
 };
