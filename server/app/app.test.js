@@ -26,7 +26,7 @@ describe('Endpoints', () => {
         expect.objectContaining({
           rank: 'SrA',
           name: 'Thirion',
-          balance: 1000,
+          balance: 500,
         }),
         expect.objectContaining({ rank: 'SrA', name: 'Shaw', balance: 2000 }),
         expect.objectContaining({ rank: 'SSgt', name: 'Monroe', balance: 500 }),
@@ -44,19 +44,19 @@ describe('Endpoints', () => {
       ]);
       const response = await request.get('/user');
       expect(response.statusCode).toBe(200);
-      expect(response.body).toBe(expectedResponse);
+      expect(response.body).toEqual(expectedResponse);
     });
     it('should respond with 200 when GET ID is called', async () => {
       const expectedResponse = expect.objectContaining({
         id: 1,
         name: 'Thirion',
         rank: 'SrA',
-        balance: 1000,
+        balance: 500,
       });
 
       const response = await request.get('/user/1');
       expect(response.statusCode).toBe(200);
-      expect(response.body).toBe(expectedResponse);
+      expect(response.body).toEqual(expectedResponse);
     });
     it('should respond with 204 when PATCH is called', async () => {
       const response = await request.patch('/user/1').send({ rank: 'Bob' });
