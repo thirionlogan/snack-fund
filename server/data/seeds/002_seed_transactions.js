@@ -1,8 +1,8 @@
 exports.seed = (knex) =>
-  knex('transaction')
+  knex('transactions')
     .del()
     .then(() =>
-      knex('transaction').insert([
+      knex('transactions').insert([
         { user_id: 1, amount: 1000 },
         { user_id: 2, amount: 2000 },
         { user_id: 3, amount: 500 },

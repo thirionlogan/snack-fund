@@ -1,5 +1,4 @@
 const express = require('express');
-const knex = require('../data/db');
 const errorHandler = require('../middleware/errorHandler');
 const { createTransaction } = require('../services/transactionService');
 const {
@@ -21,13 +20,21 @@ app.get('/user', (req, res) => {
     .then((users) => {
       res.status(200).send(users);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(404);
     });
 });
 
 app.get('/user/:userId', (req, res) => {
-  getUserById(req.params.userId);
+  getUserById(req.params.userId)
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(404);
+    });
 });
 
 app.post('/user', (req, res) => {
@@ -64,7 +71,7 @@ app.delete('/user/:userId', (req, res) => {
 app.post('/transaction/:userId', (req, res) => {
   createTransaction(req.params.userId, req.body.amount)
     .then(() => {
-      res.sendStatus(200);
+      res.sendStatus(204);
     })
     .catch(() => {
       res.sendStatus(404);

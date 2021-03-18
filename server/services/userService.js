@@ -6,14 +6,19 @@ const createUser = ({ name, rank, balance }) =>
     .save(null, { required: true })
     .then((id) => createTransaction(id, balance));
 
-const getUsers = () => User.fetchAll(null, { required: true });
+const getUsers = () =>
+  User.fetchAll({ required: true, withRelated: ['balance'] });
 
-const getUserById = (id) => new User({ id }).fetch(null, { required: true });
+const getUserById = (id) =>
+  User.where({ id }).fetch({
+    required: true,
+    withRelated: ['balance'],
+  });
 
 const updateUser = (id, user) =>
-  new User({ id, ...user }).save(null, { required: true });
+  new User({ id, ...user }).save(null, { required: true, patch: true });
 
-const deleteUser = (id) => new User({ id }).destroy(null, { required: true });
+const deleteUser = (id) => new User({ id }).destroy({ required: true });
 
 module.exports = {
   createUser,
