@@ -21,7 +21,6 @@ app.get('/user', (req, res) => {
       res.status(200).send(users);
     })
     .catch((err) => {
-      console.log(err);
       res.sendStatus(404);
     });
 });
@@ -32,7 +31,6 @@ app.get('/user/:userId', (req, res) => {
       res.status(200).send(user);
     })
     .catch((error) => {
-      console.log(error);
       res.sendStatus(404);
     });
 });
