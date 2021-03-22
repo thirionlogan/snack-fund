@@ -33,13 +33,11 @@ app.use(errorHandler);
 
 // user
 app.get('/user', (req, res) => {
-  console.log(req.ip);
   getUsers()
     .then((users) => {
       res.status(200).send(users);
     })
     .catch((err) => {
-      console.log(err);
       res.sendStatus(404);
     });
 });
