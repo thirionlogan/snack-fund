@@ -3,6 +3,7 @@ const { createTransaction } = require('./transactionService');
 
 const convertTransactions = (user) => ({
   ...user,
+  transactions: user.balance,
   balance: user.balance.reduce((a, b) => a + b.amount, 0),
 });
 
