@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, InputBase } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
+import DescriptionIcon from '@material-ui/icons/Description';
 import CreateUserModal from '../CreateUserModal/CreateUserModal';
 import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
 import { getUsers } from '../../client/client';
@@ -77,6 +78,14 @@ function App() {
           onClick={handleOpenCreateUserModal}
         >
           Add User
+        </Button>
+        <Button
+          variant='contained'
+          className={classes.button}
+          startIcon={<DescriptionIcon />}
+          href='http://localhost:3001/report'
+        >
+          Get Report
         </Button>
         {users
           .filter((user) => {

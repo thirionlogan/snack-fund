@@ -6,6 +6,9 @@ describe('Endpoints', () => {
   beforeAll(async () => {
     await db.migrate.latest().then(() => db.seed.run());
   });
+  afterAll(async () => {
+    await db.migrate.rollback();
+  });
 
   describe('404', () => {
     it('should respond with 404', async () => {
@@ -73,6 +76,13 @@ describe('Endpoints', () => {
         .post('/transaction/1')
         .send({ amount: 1000 });
       expect(response.statusCode).toBe(204);
+    });
+  });
+
+  describe('/report', () => {
+    it('should respond with a report.xlsx', async () => {
+      const response = await request.get('/report');
+      expect(response.statusCode).toBe(200);
     });
   });
 });

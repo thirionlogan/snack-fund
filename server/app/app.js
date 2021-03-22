@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const stream = require('stream');
 const db = require('../data/db');
 const errorHandler = require('../middleware/errorHandler');
 const { createTransaction } = require('../services/transactionService');
+const { getReport } = require('../services/reportService');
 const {
   createUser,
   getUsers,
@@ -12,7 +14,7 @@ const {
 } = require('../services/userService');
 
 const app = express();
-db.migrate.latest().then(() => db.seed.run());
+db.migrate.latest();
 
 app.use(express.json());
 
@@ -90,6 +92,24 @@ app.post('/transaction/:userId', (req, res) => {
     })
     .catch(() => {
       res.sendStatus(404);
+    });
+});
+
+//report
+app.get('/report', (req, res) => {
+  getReport()
+    .then((report) => {
+      const fileName =
+        'snackfundReport' + new Date().toISOString().slice(0, 10) + '.xlsx';
+      res.set('Content-disposition', 'attachment; filename=' + fileName);
+      res.set('Content-Type', 'text/plain');
+      res.status(200);
+      const readStream = new stream.PassThrough();
+      readStream.end(report);
+      readStream.pipe(res);
+    })
+    .catch(() => {
+      res.sendStatus(500);
     });
 });
 
