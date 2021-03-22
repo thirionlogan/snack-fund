@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Paper,
@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import { createTransaction, getUserById } from '../../client/client';
 
 CreateTransactionModal.propTypes = {
   open: PropTypes.bool.isRequired,
@@ -18,6 +19,8 @@ CreateTransactionModal.propTypes = {
 };
 
 const useStyles = makeStyles((theme) => ({
+  success: { color: theme.palette.success.main, marginLeft: '0.25em' },
+  error: { color: theme.palette.error.main, marginLeft: '0.25em' },
   button: {
     margin: theme.spacing(1),
   },
@@ -30,12 +33,41 @@ const useStyles = makeStyles((theme) => ({
     top: `50%`,
     left: `50%`,
     transform: `translate(-50%, -50%)`,
+    display: 'flex',
+    flexDirection: 'column',
   },
   textField: { margin: theme.spacing(1) },
+  typography: { display: 'flex' },
 }));
 
 function CreateTransactionModal({ open, handleClose, user }) {
   const classes = useStyles();
+  const [amount, setAmount] = useState('');
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    setAmount('');
+    refreshBalance();
+  }, [open, user]);
+
+  const refreshBalance = () => {
+    if (user.id)
+      getUserById(user.id).then(({ data }) => {
+        console.log(data);
+        setBalance(data.balance);
+      });
+  };
+
+  const handleChangeAmount = ({ target: { value } }) => {
+    if (!isNaN(value) || value === '-') setAmount(value);
+  };
+
+  const handleSubmit = () => {
+    if (!isNaN(amount))
+      createTransaction(user.id, amount * 100).then(refreshBalance());
+  };
+
+  const balanceColor = () => (balance < 0 ? classes.error : classes.success);
 
   return (
     <Modal
@@ -45,13 +77,26 @@ function CreateTransactionModal({ open, handleClose, user }) {
       aria-describedby='simple-modal-description'
     >
       <Paper className={classes.paper}>
-        <Typography>You have ${(user.balance / 100).toFixed(2)}</Typography>
+        <Typography className={classes.typography}>
+          You have{' '}
+          <Typography className={balanceColor()}>
+            ${(balance / 100).toFixed(2)}
+          </Typography>
+        </Typography>
         <TextField
           InputProps={{
             startAdornment: <InputAdornment position='start'>$</InputAdornment>,
           }}
+          value={amount}
+          onChange={handleChangeAmount}
+          className={classes.textField}
         />
-        <Button variant='contained' color='primary' endIcon={<Icon>send</Icon>}>
+        <Button
+          variant='contained'
+          color='primary'
+          endIcon={<Icon>send</Icon>}
+          onClick={handleSubmit}
+        >
           Send Transaction
         </Button>
       </Paper>

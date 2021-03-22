@@ -9,7 +9,7 @@ const convertTransactions = (user) => ({
 const createUser = ({ name, rank, balance }) =>
   new User({ name, rank })
     .save(null, { required: true })
-    .then((id) => createTransaction(id, balance));
+    .then(({ id }) => createTransaction(id, balance));
 
 const getUsers = () =>
   User.fetchAll({
@@ -26,7 +26,7 @@ const getUserById = (id) =>
     .then((userModel) => convertTransactions(userModel.toJSON()));
 
 const updateUser = (id, user) =>
-  new User({ id, ...user }).save(null, { required: true, patch: true });
+  new User({ id }).save({ ...user }, { required: true, patch: true });
 
 const deleteUser = (id) => new User({ id }).destroy({ required: true });
 
