@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+const db = require('../data/db');
 const errorHandler = require('../middleware/errorHandler');
 const { createTransaction } = require('../services/transactionService');
 const {
@@ -10,17 +12,34 @@ const {
 } = require('../services/userService');
 
 const app = express();
+db.migrate.latest().then(() => db.seed.run());
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',
+      'https://localhost:3000',
+      'http://localhost:3001',
+      'https://localhost:3001',
+    ],
+    credentials: true,
+    exposedHeaders: ['set-cookie'],
+  })
+);
+
 app.use(errorHandler);
 
 // user
 app.get('/user', (req, res) => {
+  console.log(req.ip);
   getUsers()
     .then((users) => {
       res.status(200).send(users);
     })
     .catch((err) => {
+      console.log(err);
       res.sendStatus(404);
     });
 });
@@ -77,7 +96,7 @@ app.post('/transaction/:userId', (req, res) => {
 });
 
 app.use((req, res, next) => {
-  res.status(404).send('resource not found');
+  res.sendStatus(404);
 });
 
 module.exports = app;

@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.0",
     "babel-loader": "8.1.0",
@@ -24,6 +25,7 @@
     "bookshelf": "^1.2.0",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "cors": "^2.8.5",
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -78,7 +80,11 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "server": "node server/server.js",
+    "migrate": "npx knex migrate:latest --knexfile ./server/knexfile.js",
+    "rollback": "npx knex migrate:rollback --knexfile ./server/knexfile.js",
+    "seed": "npx knex seed:run --knexfile ./server/knexfile.js"
   },
   "eslintConfig": {
     "extends": [

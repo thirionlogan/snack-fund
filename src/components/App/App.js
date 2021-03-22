@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Paper, InputBase } from '@material-ui/core';
@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import CreateUserModal from '../CreateUserModal/CreateUserModal';
 import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
+import { getUsers } from '../../client/client';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -22,20 +23,15 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const [users, setUsers] = useState([
-    { id: 1, rank: 'SrA', name: 'Thirion', balance: 1025 },
-    { id: 2, rank: 'SrA', name: 'Shaw', balance: 1000 },
-    { id: 3, rank: 'SSgt', name: 'Monroe', balance: 1000 },
-    { id: 4, rank: 'TSgt', name: 'Drevon', balance: -1000 },
-    { id: 5, rank: 'A1C', name: 'Wilson', balance: 1000 },
-    { id: 6, rank: 'TSgt', name: 'Messler', balance: 1000 },
-  ]);
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
   const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(
     false
   );
   const [selectedUser, setSelectedUser] = useState({});
+
+  useEffect(() => getUsers().then(({ data }) => setUsers(data)), []);
 
   const handleOpenCreateUserModal = () => {
     setOpenCreateUserModal(true);
