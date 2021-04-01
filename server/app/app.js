@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const stream = require('stream');
-const db = require('../data/db');
 const errorHandler = require('../middleware/errorHandler');
 const { createTransaction } = require('../services/transactionService');
 const { getReport } = require('../services/reportService');
@@ -14,7 +13,6 @@ const {
 } = require('../services/userService');
 
 const app = express();
-db.migrate.latest();
 
 app.use(express.json());
 

@@ -2,12 +2,13 @@ require('dotenv').config({ path: '../.env' });
 const path = require('path');
 const migrations = path.resolve(__dirname, './data/migrations');
 const seeds = path.resolve(__dirname, './data/seeds');
+const dbfile = path.resolve(__dirname, './data/mydb.sqlite');
 
 module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './mydb.sqlite',
+      filename: dbfile,
     },
     useNullAsDefault: true,
     migrations: {
@@ -27,7 +28,7 @@ module.exports = {
   staging: {
     client: 'sqlite3',
     connection: {
-      filename: './mydb.sqlite',
+      filename: dbfile,
     },
     useNullAsDefault: true,
     migrations: {
@@ -38,7 +39,7 @@ module.exports = {
   production: {
     client: 'sqlite3',
     connection: {
-      filename: './mydb.sqlite',
+      filename: dbfile,
     },
     useNullAsDefault: true,
     migrations: {
