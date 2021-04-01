@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   textField: { margin: theme.spacing(1) },
 }));
 
-function CreateUserModal({ open, handleClose }) {
+function CreateUserModal({ open, handleClose, handleGetUsers }) {
   const classes = useStyles();
   const [amount, setAmount] = useState('0.00');
   const [name, setName] = useState('');
@@ -51,8 +51,11 @@ function CreateUserModal({ open, handleClose }) {
   const handleChangeRank = ({ target: { value } }) => setRank(value);
 
   const handleSubmit = () => {
-    if (!isNaN(amount) && name && rank)
-      createUser({ name, rank, balance: amount * 100 }).then(handleClose);
+    if (!isNaN(amount) && name && rank) {
+      createUser({ name, rank, balance: amount * 100 })
+        .then(handleClose)
+        .then(handleGetUsers);
+    }
   };
 
   return (

@@ -32,7 +32,9 @@ function App() {
   );
   const [selectedUser, setSelectedUser] = useState({});
 
-  useEffect(() => getUsers().then(({ data }) => setUsers(data)), []);
+  const handleGetUsers = () => getUsers().then(({ data }) => setUsers(data));
+
+  useEffect(handleGetUsers, []);
 
   const handleOpenCreateUserModal = () => {
     setOpenCreateUserModal(true);
@@ -110,6 +112,7 @@ function App() {
         <CreateUserModal
           open={openCreateUserModal}
           handleClose={handleCloseCreateUserModal}
+          handleGetUsers={handleGetUsers}
         />
         <CreateTransactionModal
           open={openCreateTransactionModal}
