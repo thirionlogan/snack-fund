@@ -6,8 +6,8 @@ import {
   TextField,
   InputAdornment,
   Typography,
-  Icon,
 } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { createTransaction, getUserById } from '../../client/client';
@@ -53,7 +53,6 @@ function CreateTransactionModal({ open, handleClose, user }) {
   const refreshBalance = () => {
     if (user.id)
       getUserById(user.id).then(({ data }) => {
-        console.log(data);
         setBalance(data.balance);
       });
   };
@@ -64,7 +63,7 @@ function CreateTransactionModal({ open, handleClose, user }) {
 
   const handleSubmit = () => {
     if (!isNaN(amount))
-      createTransaction(user.id, amount * 100).then(refreshBalance());
+      createTransaction(user.id, amount * 100).then(refreshBalance);
   };
 
   const balanceColor = () => (balance < 0 ? classes.error : classes.success);
@@ -94,7 +93,7 @@ function CreateTransactionModal({ open, handleClose, user }) {
         <Button
           variant='contained'
           color='primary'
-          endIcon={<Icon>send</Icon>}
+          endIcon={<SendIcon />}
           onClick={handleSubmit}
         >
           Send Transaction
