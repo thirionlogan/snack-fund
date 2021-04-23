@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Paper, InputBase } from '@material-ui/core';
+import { Button, Paper, InputBase, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -12,6 +12,13 @@ import { getUsers } from '../../client/client';
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+  },
+  adminButtonContainer: {
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    display: 'flex',
+    flexDirection: 'column',
   },
   search: {
     margin: theme.spacing(1),
@@ -71,24 +78,6 @@ function App() {
           />
           <SearchIcon />
         </Paper>
-
-        <Button
-          variant='contained'
-          color='secondary'
-          className={classes.button}
-          startIcon={<AddIcon />}
-          onClick={handleOpenCreateUserModal}
-        >
-          Add User
-        </Button>
-        <Button
-          variant='contained'
-          className={classes.button}
-          startIcon={<DescriptionIcon />}
-          href='http://localhost:3001/report'
-        >
-          Get Report
-        </Button>
         {users
           .filter((user) => {
             return user.name.toLowerCase().includes(search.toLowerCase());
@@ -109,6 +98,25 @@ function App() {
               {user.rank + ' ' + user.name}
             </Button>
           ))}
+        <div className={classes.adminButtonContainer}>
+          <Fab
+            variant='extended'
+            color='secondary'
+            className={classes.button}
+            onClick={handleOpenCreateUserModal}
+          >
+            <AddIcon />
+            Add User
+          </Fab>
+          <Fab
+            variant='extended'
+            className={classes.button}
+            href='http://localhost:3001/report'
+          >
+            <DescriptionIcon />
+            Get Report
+          </Fab>
+        </div>
         <CreateUserModal
           open={openCreateUserModal}
           handleClose={handleCloseCreateUserModal}
