@@ -21,12 +21,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   search: {
+    position: 'sticky',
+    top: 0,
     margin: theme.spacing(1),
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    zIndex: 10,
   },
+  sticky: { position: 'sticky', top: 0 },
 }));
 
 function App() {
@@ -87,9 +91,9 @@ function App() {
             const textB = b.name.toUpperCase();
             return textA < textB ? -1 : textA > textB ? 1 : 0;
           })
-          .map((user) => (
+          .map((user, index) => (
             <Button
-              key={user.name}
+              key={user.rank + user.name + index}
               variant='contained'
               color='primary'
               className={classes.button}
