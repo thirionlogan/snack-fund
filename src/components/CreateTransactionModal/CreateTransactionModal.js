@@ -3,12 +3,16 @@ import {
   Button,
   Paper,
   Modal,
+  IconButton,
   TextField,
+  Tooltip,
   InputAdornment,
   Typography,
 } from '@material-ui/core';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { createTransaction, getUserById } from '../../client/client';
@@ -41,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     transform: `translate(-50%, -50%)`,
     display: 'flex',
     flexDirection: 'column',
+  },
+  upperControls: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   textField: { margin: theme.spacing(1) },
   typography: { display: 'flex' },
@@ -92,12 +101,26 @@ function CreateTransactionModal({ open, handleClose, user }) {
       aria-describedby='simple-modal-description'
     >
       <Paper className={classes.paper}>
-        <Typography className={classes.typography}>
-          You have{' '}
-          <Typography className={balanceColor()}>
-            ${(balance / 100).toFixed(2)}
+        <div className={classes.upperControls}>
+          <Typography className={classes.typography}>
+            You have{' '}
+            <Typography className={balanceColor()}>
+              ${(balance / 100).toFixed(2)}
+            </Typography>
           </Typography>
-        </Typography>
+          <div>
+            <Tooltip title='Edit User' placement='top' arrow>
+              <IconButton aria-label='edit'>
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title='Delete User' placement='top' arrow>
+              <IconButton aria-label='delete'>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </div>
         <TextField
           InputProps={{
             startAdornment: <InputAdornment position='start'>$</InputAdornment>,
