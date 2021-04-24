@@ -62,32 +62,32 @@ function CreateUserModal({ open, handleClose, handleGetUsers }) {
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby='simple-modal-title'
-      aria-describedby='simple-modal-description'
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
     >
       <Paper className={classes.paper}>
-        <h2 id='simple-modal-title'>Add User</h2>
+        <h2 id="simple-modal-title">Add User</h2>
         <div>
           <TextField
-            label='Rank'
-            variant='filled'
+            label="Rank"
+            variant="filled"
             className={classes.textField}
             fullWidth
             onChange={handleChangeRank}
           />
           <TextField
-            label='Name'
-            variant='filled'
+            label="Name"
+            variant="filled"
             className={classes.textField}
             fullWidth
             onChange={handleChangeName}
           />
           <TextField
-            label='Initial Balance'
-            variant='filled'
+            label="Initial Balance"
+            variant="filled"
             InputProps={{
               startAdornment: (
-                <InputAdornment position='start'>$</InputAdornment>
+                <InputAdornment position="start">$</InputAdornment>
               ),
             }}
             value={amount}
@@ -97,9 +97,9 @@ function CreateUserModal({ open, handleClose, handleGetUsers }) {
           />
         </div>
         <Button
-          variant='contained'
-          color='primary'
-          size='large'
+          variant="contained"
+          color="primary"
+          size="large"
           className={classes.button}
           startIcon={<SaveIcon />}
           onClick={handleSubmit}

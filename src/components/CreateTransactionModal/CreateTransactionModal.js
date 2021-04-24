@@ -97,8 +97,8 @@ function CreateTransactionModal({ open, handleClose, user }) {
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby='simple-modal-title'
-      aria-describedby='simple-modal-description'
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
     >
       <Paper className={classes.paper}>
         <div className={classes.upperControls}>
@@ -109,13 +109,13 @@ function CreateTransactionModal({ open, handleClose, user }) {
             </Typography>
           </Typography>
           <div>
-            <Tooltip title='Edit User' placement='top' arrow>
-              <IconButton aria-label='edit'>
+            <Tooltip title="Edit User" placement="top" arrow>
+              <IconButton aria-label="edit">
                 <EditIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title='Delete User' placement='top' arrow>
-              <IconButton aria-label='delete'>
+            <Tooltip title="Delete User" placement="top" arrow>
+              <IconButton aria-label="delete">
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
@@ -123,7 +123,7 @@ function CreateTransactionModal({ open, handleClose, user }) {
         </div>
         <TextField
           InputProps={{
-            startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           value={amount}
           onChange={handleChangeAmount}
@@ -132,8 +132,8 @@ function CreateTransactionModal({ open, handleClose, user }) {
         <div className={classes.buttonContainer}>
           <Button
             className={classes.button}
-            variant='contained'
-            color='secondary'
+            variant="contained"
+            color="secondary"
             endIcon={<TrendingDownIcon />}
             onClick={() => handleSubmit(-100)}
           >
@@ -141,8 +141,8 @@ function CreateTransactionModal({ open, handleClose, user }) {
           </Button>
           <Button
             className={classes.button}
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             endIcon={<TrendingUpIcon />}
             onClick={() => handleSubmit(100)}
           >

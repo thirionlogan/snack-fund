@@ -70,12 +70,12 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <header className="App-header">
         <Paper className={classes.search}>
           <InputBase
             className={classes.input}
-            placeholder='Search Users'
+            placeholder="Search Users"
             inputProps={{ 'aria-label': 'search users' }}
             onChange={handleSearch}
             value={search}
@@ -94,8 +94,8 @@ function App() {
           .map((user, index) => (
             <Button
               key={user.rank + user.name + index}
-              variant='contained'
-              color='primary'
+              variant="contained"
+              color="primary"
               className={classes.button}
               onClick={() => handlesetOpenCreateTransactionModal(user)}
             >
@@ -104,8 +104,8 @@ function App() {
           ))}
         <div className={classes.adminButtonContainer}>
           <Fab
-            variant='extended'
-            color='secondary'
+            variant="extended"
+            color="secondary"
             className={classes.button}
             onClick={handleOpenCreateUserModal}
           >
@@ -113,9 +113,9 @@ function App() {
             Add User
           </Fab>
           <Fab
-            variant='extended'
+            variant="extended"
             className={classes.button}
-            href='http://localhost:3001/report'
+            href="http://localhost:3001/report"
           >
             <DescriptionIcon />
             Get Report

@@ -82,7 +82,7 @@ app.delete('/user/:userId', (req, res) => {
     });
 });
 
-//transaction
+// transaction
 app.post('/transaction/:userId', (req, res) => {
   createTransaction(req.params.userId, req.body.amount)
     .then(() => {
@@ -93,7 +93,7 @@ app.post('/transaction/:userId', (req, res) => {
     });
 });
 
-//report
+// report
 app.get('/report', (req, res) => {
   getReport()
     .then((report) => {
