@@ -1,35 +1,70 @@
 const { getUsers } = require('./userService');
-const xlsx = require('node-xlsx').default;
+const xlsx = require('xlsx');
 
-const options = {};
+const options = { type: 'buffer', cellDates: true };
 
 const getReport = () => {
   return getUsers(false)
-    .then((users) => [
-      {
-        name: 'Balances',
-        data: [['Rank', 'Name', 'Balance']].concat(
-          users.map((user) => [user.rank, user.name, user.balance / 100])
+    .then((users) => ({
+      Props: {
+        Title: 'snackfundReport' + new Date().toISOString().slice(0, 10),
+        Author: 'Logan Thirion',
+        Manager: 'Michael Shaw',
+        Company: 'Conjure',
+        CreatedDate: new Date(),
+      },
+      SheetNames: ['Balances', 'Transactions'],
+      '!ref': 'C2:C',
+      Sheets: {
+        Balances: xlsx.utils.aoa_to_sheet(
+          [
+            [
+              '',
+              'Total',
+              {
+                v: (users.reduce((x, y) => x + y.balance, 0) / 100).toFixed(2),
+                t: 'n',
+                z: '$#,##0.00',
+              },
+            ],
+            ['Rank', 'Name', 'Balance'],
+          ].concat(
+            users.map((user) => [
+              { v: user.rank, t: 's' },
+              { v: user.name, t: 's' },
+              {
+                v: (user.balance / 100).toFixed(2),
+                t: 'n',
+                z: '$#,##0.00',
+              },
+            ])
+          ),
+          { cellDates: true }
+        ),
+        Transactions: xlsx.utils.aoa_to_sheet(
+          [['Rank', 'Name', 'Amount', 'Date']].concat(
+            users
+              .filter((user) => user.transactions.length > 0)
+              .map((user) =>
+                user.transactions.map((transaction) => [
+                  { v: user.rank, t: 's' },
+                  { v: user.name, t: 's' },
+                  {
+                    v: (transaction.amount / 100).toFixed(2),
+                    t: 'n',
+                    z: '$#,##0.00',
+                  },
+                  { v: transaction.created_at, t: 'd', z: 'm/dd/yy' },
+                ])
+              )
+              .flat()
+          ),
+          { cellDates: true }
         ),
       },
-      {
-        name: 'Transactions',
-        data: [['Rank', 'Name', 'Amount', 'Date']].concat(
-          users
-            .filter((user) => user.transactions.length > 0)
-            .map((user) =>
-              user.transactions.map((transaction) => [
-                user.rank,
-                user.name,
-                transaction.amount / 100,
-                transaction.created_at.toISOString(),
-              ])
-            )
-            .flat()
-        ),
-      },
-    ])
-    .then((data) => xlsx.build(data, options));
+    }))
+    .then((workBook) => xlsx.write(workBook, options))
+    .catch(console.error);
 };
 
 module.exports = { getReport };
