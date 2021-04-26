@@ -12,11 +12,16 @@ const createUser = ({ name, rank, balance }) =>
     .save(null, { required: true })
     .then(({ id }) => createTransaction(id, balance));
 
-const getUsers = () =>
+const getUsers = (filterInactive = true) =>
   User.fetchAll({
     required: true,
     withRelated: ['balance'],
-  }).then((userCollection) => userCollection.toJSON().map(convertTransactions));
+  }).then((userCollection) =>
+    userCollection
+      .toJSON()
+      .filter(({ active }) => !filterInactive || active)
+      .map(convertTransactions)
+  );
 
 const getUserById = (id) =>
   User.where({ id })
@@ -29,7 +34,8 @@ const getUserById = (id) =>
 const updateUser = (id, user) =>
   new User({ id }).save({ ...user }, { required: true, patch: true });
 
-const deleteUser = (id) => new User({ id }).destroy({ required: true });
+const deleteUser = (id) =>
+  new User({ id }).save({ active: false }, { required: true, patch: true });
 
 module.exports = {
   createUser,

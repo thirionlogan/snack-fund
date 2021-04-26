@@ -4,7 +4,7 @@ const xlsx = require('node-xlsx').default;
 const options = {};
 
 const getReport = () => {
-  return getUsers()
+  return getUsers(false)
     .then((users) => [
       {
         name: 'Balances',
