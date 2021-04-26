@@ -61,6 +61,7 @@ function CreateTransactionModal({
   handleClose,
   user,
   handleOpenCreateUserModal,
+  handleOpenDeleteUserModal,
 }) {
   const classes = useStyles();
   const [amount, setAmount] = useState('');
@@ -117,7 +118,10 @@ function CreateTransactionModal({
               </IconButton>
             </Tooltip>
             <Tooltip title='Delete User' placement='top' arrow>
-              <IconButton aria-label='delete'>
+              <IconButton
+                aria-label='delete'
+                onClick={handleOpenDeleteUserModal}
+              >
                 <DeleteIcon />
               </IconButton>
             </Tooltip>

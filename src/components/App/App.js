@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import DescriptionIcon from '@material-ui/icons/Description';
 import CreateUserModal from '../CreateUserModal/CreateUserModal';
 import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
+import DeleteUserModal from '../DeleteUserModal/DeleteUserModal';
 import { getUsers } from '../../client/client';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
+  const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
   const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(
     false
   );
@@ -63,6 +65,14 @@ function App() {
   const handleCloseCreateTransactionModal = () => {
     setOpenCreateTransactionModal(false);
     setSelectedUser({});
+  };
+
+  const handleOpenDeleteUserModal = () => {
+    setOpenDeleteUserModal(true);
+  };
+
+  const handleCloseDeleteUserModal = () => {
+    setOpenDeleteUserModal(false);
   };
 
   const handleSearch = (e) => {
@@ -132,6 +142,14 @@ function App() {
           handleClose={handleCloseCreateTransactionModal}
           user={selectedUser}
           handleOpenCreateUserModal={handleOpenCreateUserModal}
+          handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+        />
+        <DeleteUserModal
+          open={openDeleteUserModal}
+          handleClose={handleCloseDeleteUserModal}
+          user={selectedUser}
+          handleGetUsers={handleGetUsers}
+          handleCloseCreateTransactionModal={handleCloseCreateTransactionModal}
         />
       </header>
     </div>
