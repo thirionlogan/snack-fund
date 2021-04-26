@@ -9,11 +9,16 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import PropTypes from 'prop-types';
-import { createUser } from '../../client/client';
+import { createUser, updateUser } from '../../client/client';
 
 CreateUserModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  user: {
+    id: PropTypes.string,
+    name: PropTypes.string,
+    rank: PropTypes.string,
+  },
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -33,15 +38,17 @@ const useStyles = makeStyles((theme) => ({
   textField: { margin: theme.spacing(1) },
 }));
 
-function CreateUserModal({ open, handleClose, handleGetUsers }) {
+function CreateUserModal({ open, handleClose, handleGetUsers, user }) {
   const classes = useStyles();
   const [amount, setAmount] = useState('0.00');
-  const [name, setName] = useState('');
-  const [rank, setRank] = useState('');
+  const [name, setName] = useState(user.name || '');
+  const [rank, setRank] = useState(user.rank || '');
 
   useEffect(() => {
     setAmount('0.00');
-  }, [open]);
+    setName(user.name || '');
+    setRank(user.rank || '');
+  }, [open, user]);
 
   const handleChangeAmount = ({ target: { value } }) => {
     if (!isNaN(value) || value === '-') setAmount(value);
@@ -51,7 +58,11 @@ function CreateUserModal({ open, handleClose, handleGetUsers }) {
   const handleChangeRank = ({ target: { value } }) => setRank(value);
 
   const handleSubmit = () => {
-    if (!isNaN(amount) && name && rank) {
+    if (user.id && name && rank) {
+      updateUser(user.id, { name, rank })
+        .then(handleClose)
+        .then(handleGetUsers);
+    } else if (!isNaN(amount) && name && rank) {
       createUser({ name, rank, balance: amount * 100 })
         .then(handleClose)
         .then(handleGetUsers);
@@ -66,7 +77,7 @@ function CreateUserModal({ open, handleClose, handleGetUsers }) {
       aria-describedby='simple-modal-description'
     >
       <Paper className={classes.paper}>
-        <h2 id='simple-modal-title'>Add User</h2>
+        <h2 id='simple-modal-title'>{user.id ? 'Edit User' : 'Add User'}</h2>
         <div>
           <TextField
             label='Rank'
@@ -74,6 +85,7 @@ function CreateUserModal({ open, handleClose, handleGetUsers }) {
             className={classes.textField}
             fullWidth
             onChange={handleChangeRank}
+            value={rank}
           />
           <TextField
             label='Name'
@@ -81,20 +93,23 @@ function CreateUserModal({ open, handleClose, handleGetUsers }) {
             className={classes.textField}
             fullWidth
             onChange={handleChangeName}
+            value={name}
           />
-          <TextField
-            label='Initial Balance'
-            variant='filled'
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>$</InputAdornment>
-              ),
-            }}
-            value={amount}
-            onChange={handleChangeAmount}
-            className={classes.textField}
-            fullWidth
-          />
+          {!user.id ? (
+            <TextField
+              label='Initial Balance'
+              variant='filled'
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>$</InputAdornment>
+                ),
+              }}
+              value={amount}
+              onChange={handleChangeAmount}
+              className={classes.textField}
+              fullWidth
+            />
+          ) : null}
         </div>
         <Button
           variant='contained'

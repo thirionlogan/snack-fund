@@ -21,6 +21,7 @@ CreateTransactionModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   user: PropTypes.object,
+  handleOpenCreateUserModal: PropTypes.func,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -55,21 +56,22 @@ const useStyles = makeStyles((theme) => ({
   typography: { display: 'flex' },
 }));
 
-function CreateTransactionModal({ open, handleClose, user }) {
+function CreateTransactionModal({
+  open,
+  handleClose,
+  user,
+  handleOpenCreateUserModal,
+}) {
   const classes = useStyles();
   const [amount, setAmount] = useState('');
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    const refreshBalance = () => {
-      if (user.id)
-        getUserById(user.id).then(({ data }) => {
-          setBalance(data.balance);
-        });
-    };
-
     setAmount('');
-    refreshBalance();
+    if (user.id)
+      getUserById(user.id).then(({ data }) => {
+        setBalance(data.balance);
+      });
   }, [open, user]);
 
   const refreshBalance = () => {
@@ -110,7 +112,7 @@ function CreateTransactionModal({ open, handleClose, user }) {
           </Typography>
           <div>
             <Tooltip title='Edit User' placement='top' arrow>
-              <IconButton aria-label='edit'>
+              <IconButton aria-label='edit' onClick={handleOpenCreateUserModal}>
                 <EditIcon />
               </IconButton>
             </Tooltip>

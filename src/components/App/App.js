@@ -55,7 +55,7 @@ function App() {
     setOpenCreateUserModal(false);
   };
 
-  const handlesetOpenCreateTransactionModal = (user) => {
+  const handleSetOpenCreateTransactionModal = (user) => {
     setOpenCreateTransactionModal(true);
     setSelectedUser(user);
   };
@@ -97,7 +97,7 @@ function App() {
               variant='contained'
               color='primary'
               className={classes.button}
-              onClick={() => handlesetOpenCreateTransactionModal(user)}
+              onClick={() => handleSetOpenCreateTransactionModal(user)}
             >
               {user.rank + ' ' + user.name}
             </Button>
@@ -125,11 +125,13 @@ function App() {
           open={openCreateUserModal}
           handleClose={handleCloseCreateUserModal}
           handleGetUsers={handleGetUsers}
+          user={selectedUser}
         />
         <CreateTransactionModal
           open={openCreateTransactionModal}
           handleClose={handleCloseCreateTransactionModal}
           user={selectedUser}
+          handleOpenCreateUserModal={handleOpenCreateUserModal}
         />
       </header>
     </div>
