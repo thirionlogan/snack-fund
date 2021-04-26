@@ -13,4 +13,5 @@ const client = {
   createTransaction: (userId, amount) =>
     instance.post(`/transaction/${userId}`, { amount }),
 };
+
 module.exports = client;

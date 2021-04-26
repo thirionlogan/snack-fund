@@ -14,7 +14,7 @@ describe('Endpoints', () => {
     it('should respond with 404', async () => {
       const response = await request.get('/doesNotExist');
       expect(response.statusCode).toBe(404);
-      expect(response.text).toBe('resource not found');
+      expect(response.text).toBe('Not Found');
     });
   });
   describe('/user', () => {

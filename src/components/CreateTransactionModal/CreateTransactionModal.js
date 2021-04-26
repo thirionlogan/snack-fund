@@ -3,11 +3,16 @@ import {
   Button,
   Paper,
   Modal,
+  IconButton,
   TextField,
+  Tooltip,
   InputAdornment,
   Typography,
-  Icon,
 } from '@material-ui/core';
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { createTransaction, getUserById } from '../../client/client';
@@ -22,7 +27,12 @@ const useStyles = makeStyles((theme) => ({
   success: { color: theme.palette.success.main, marginLeft: '0.25em' },
   error: { color: theme.palette.error.main, marginLeft: '0.25em' },
   button: {
-    margin: theme.spacing(1),
+    minWidth: theme.spacing(17),
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0 8px',
   },
   paper: {
     position: 'absolute',
@@ -36,6 +46,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  upperControls: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   textField: { margin: theme.spacing(1) },
   typography: { display: 'flex' },
 }));
@@ -46,6 +61,13 @@ function CreateTransactionModal({ open, handleClose, user }) {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
+    const refreshBalance = () => {
+      if (user.id)
+        getUserById(user.id).then(({ data }) => {
+          setBalance(data.balance);
+        });
+    };
+
     setAmount('');
     refreshBalance();
   }, [open, user]);
@@ -53,18 +75,20 @@ function CreateTransactionModal({ open, handleClose, user }) {
   const refreshBalance = () => {
     if (user.id)
       getUserById(user.id).then(({ data }) => {
-        console.log(data);
         setBalance(data.balance);
       });
   };
 
   const handleChangeAmount = ({ target: { value } }) => {
-    if (!isNaN(value) || value === '-') setAmount(value);
+    if (!isNaN(value)) setAmount(value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (multiplier) => {
     if (!isNaN(amount))
-      createTransaction(user.id, amount * 100).then(refreshBalance());
+      createTransaction(
+        user.id,
+        parseFloat(amount).toFixed(2) * multiplier
+      ).then(refreshBalance);
   };
 
   const balanceColor = () => (balance < 0 ? classes.error : classes.success);
@@ -77,12 +101,26 @@ function CreateTransactionModal({ open, handleClose, user }) {
       aria-describedby='simple-modal-description'
     >
       <Paper className={classes.paper}>
-        <Typography className={classes.typography}>
-          You have{' '}
-          <Typography className={balanceColor()}>
-            ${(balance / 100).toFixed(2)}
+        <div className={classes.upperControls}>
+          <Typography className={classes.typography}>
+            You have{' '}
+            <Typography className={balanceColor()}>
+              ${(balance / 100).toFixed(2)}
+            </Typography>
           </Typography>
-        </Typography>
+          <div>
+            <Tooltip title='Edit User' placement='top' arrow>
+              <IconButton aria-label='edit'>
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title='Delete User' placement='top' arrow>
+              <IconButton aria-label='delete'>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </div>
         <TextField
           InputProps={{
             startAdornment: <InputAdornment position='start'>$</InputAdornment>,
@@ -91,14 +129,26 @@ function CreateTransactionModal({ open, handleClose, user }) {
           onChange={handleChangeAmount}
           className={classes.textField}
         />
-        <Button
-          variant='contained'
-          color='primary'
-          endIcon={<Icon>send</Icon>}
-          onClick={handleSubmit}
-        >
-          Send Transaction
-        </Button>
+        <div className={classes.buttonContainer}>
+          <Button
+            className={classes.button}
+            variant='contained'
+            color='secondary'
+            endIcon={<TrendingDownIcon />}
+            onClick={() => handleSubmit(-100)}
+          >
+            Withdraw
+          </Button>
+          <Button
+            className={classes.button}
+            variant='contained'
+            color='primary'
+            endIcon={<TrendingUpIcon />}
+            onClick={() => handleSubmit(100)}
+          >
+            Deposit
+          </Button>
+        </div>
       </Paper>
     </Modal>
   );

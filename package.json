@@ -124,7 +124,11 @@
       "!src/**/*.d.ts",
       "server/**/*.{js,jsx,ts,tsx}",
       "!server/**/*.d.ts",
-      "!server/data/**/*.js"
+      "!server/data/**/*.js",
+      "!**/mockClient.js",
+      "!**/index.js",
+      "!**/reportWebVitals.js",
+      "!**/server.js"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
