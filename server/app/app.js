@@ -37,7 +37,7 @@ app.get('/user', (req, res) => {
     .then((users) => {
       res.status(200).send(users);
     })
-    .catch((err) => {
+    .catch(() => {
       res.sendStatus(404);
     });
 });
@@ -47,7 +47,7 @@ app.get('/user/:userId', (req, res) => {
     .then((user) => {
       res.status(200).send(user);
     })
-    .catch((error) => {
+    .catch(() => {
       res.sendStatus(404);
     });
 });

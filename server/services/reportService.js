@@ -63,8 +63,7 @@ const getReport = () => {
         ),
       },
     }))
-    .then((workBook) => xlsx.write(workBook, options))
-    .catch(console.error);
+    .then((workBook) => xlsx.write(workBook, options));
 };
 
 module.exports = { getReport };

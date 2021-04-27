@@ -86,3 +86,54 @@ describe('Endpoints', () => {
     });
   });
 });
+
+describe('Test Errors', () => {
+  const autoReject = () =>
+    new Promise((resolve, reject) => {
+      reject(new Error());
+    });
+  jest.mock('../services/userService.js', () => ({
+    getUsers: autoReject,
+    getUserById: autoReject,
+    createUser: autoReject,
+    updateUser: autoReject,
+    deleteUser: autoReject,
+  }));
+  jest.mock('../services/transactionService.js', () => ({
+    createTransaction: autoReject,
+  }));
+  jest.mock('../services/reportService.js', () => ({
+    getReport: autoReject,
+  }));
+
+  it('should respond with 404', async () => {
+    const response = await request.get('/user/1');
+    expect(response.statusCode).toBe(404);
+  });
+
+  it('should respond with 404', async () => {
+    const response = await request.get('/user');
+    expect(response.statusCode).toBe(404);
+  });
+  it('should respond with 422', async () => {
+    const response = await request.post('/user');
+    expect(response.statusCode).toBe(422);
+  });
+  it('should respond with 404', async () => {
+    const response = await request.patch('/user/1');
+    expect(response.statusCode).toBe(404);
+  });
+
+  it('should respond with 404', async () => {
+    const response = await request.delete('/user/1');
+    expect(response.statusCode).toBe(404);
+  });
+  it('should respond with 404', async () => {
+    const response = await request.post('/transaction/1');
+    expect(response.statusCode).toBe(404);
+  });
+  it('should respond with 500', async () => {
+    const response = await request.get('/report');
+    expect(response.statusCode).toBe(500);
+  });
+});
