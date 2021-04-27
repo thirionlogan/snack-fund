@@ -75,23 +75,18 @@ function CreateTransactionModal({
       });
   }, [open, user]);
 
-  const refreshBalance = () => {
-    if (user.id)
-      getUserById(user.id).then(({ data }) => {
-        setBalance(data.balance);
-      });
-  };
-
   const handleChangeAmount = ({ target: { value } }) => {
     if (!isNaN(value)) setAmount(value);
   };
 
   const handleSubmit = (multiplier) => {
-    if (!isNaN(amount))
-      createTransaction(
-        user.id,
-        parseFloat(amount).toFixed(2) * multiplier
-      ).then(refreshBalance);
+    if (amount && !isNaN(amount)) {
+      createTransaction(user.id, parseFloat(amount).toFixed(2) * multiplier)
+        .then(() => getUserById(user.id))
+        .then(({ data }) => {
+          setBalance(data.balance);
+        });
+    }
   };
 
   const balanceColor = () => (balance < 0 ? classes.error : classes.success);

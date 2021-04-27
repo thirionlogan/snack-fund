@@ -126,6 +126,7 @@
       "!server/**/*.d.ts",
       "!server/data/**/*.js",
       "!**/mockClient.js",
+      "!**/client.js",
       "!**/index.js",
       "!**/reportWebVitals.js",
       "!**/server.js"
