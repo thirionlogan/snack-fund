@@ -14,11 +14,7 @@ import { createUser, updateUser } from '../../client/client';
 CreateUserModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  user: {
-    id: PropTypes.string,
-    name: PropTypes.string,
-    rank: PropTypes.string,
-  },
+  user: PropTypes.object,
 };
 
 const useStyles = makeStyles((theme) => ({
