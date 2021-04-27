@@ -49,13 +49,9 @@ function App() {
 
   useEffect(handleGetUsers, []);
 
-  const handleOpenCreateUserModal = () => {
-    setOpenCreateUserModal(true);
-  };
+  const handleOpenCreateUserModal = () => setOpenCreateUserModal(true);
 
-  const handleCloseCreateUserModal = () => {
-    setOpenCreateUserModal(false);
-  };
+  const handleCloseCreateUserModal = () => setOpenCreateUserModal(false);
 
   const handleSetOpenCreateTransactionModal = (user) => {
     setOpenCreateTransactionModal(true);
@@ -67,17 +63,11 @@ function App() {
     setSelectedUser({});
   };
 
-  const handleOpenDeleteUserModal = () => {
-    setOpenDeleteUserModal(true);
-  };
+  const handleOpenDeleteUserModal = () => setOpenDeleteUserModal(true);
 
-  const handleCloseDeleteUserModal = () => {
-    setOpenDeleteUserModal(false);
-  };
+  const handleCloseDeleteUserModal = () => setOpenDeleteUserModal(false);
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
+  const handleSearch = (e) => setSearch(e.target.value);
 
   return (
     <div className='App'>

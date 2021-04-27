@@ -129,7 +129,8 @@
       "!**/client.js",
       "!**/index.js",
       "!**/reportWebVitals.js",
-      "!**/server.js"
+      "!**/server.js",
+      "!**/models.js"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
