@@ -6,9 +6,7 @@ import DeleteUserModal from './DeleteUserModal';
 import client from '../../client/client';
 
 describe('Delete User Modal', () => {
-  let handleClose;
-  let handleGetUsers;
-  let handleCloseCreateTransactionModal;
+  let handleClose, handleGetUsers, handleCloseCreateTransactionModal;
   const user = {
     id: 1,
     name: 'Shawesome',
@@ -37,13 +35,15 @@ describe('Delete User Modal', () => {
     const messageText = screen.getByText(expectedText);
 
     fireEvent.click(deleteButton);
-    await waitFor(() => {
-      expect(messageText).toBeTruthy();
-      expect(client.deleteUser).toBeCalledWith(1);
-      expect(handleGetUsers).toBeCalledTimes(1);
-      expect(handleClose).toBeCalledTimes(1);
-      expect(handleCloseCreateTransactionModal).toBeCalledTimes(1);
-    });
+    await waitFor(() =>
+      Promise.all([
+        expect(messageText).toBeInTheDocument(),
+        expect(client.deleteUser).toBeCalledWith(1),
+        expect(handleGetUsers).toBeCalledTimes(1),
+        expect(handleClose).toBeCalledTimes(1),
+        expect(handleCloseCreateTransactionModal).toBeCalledTimes(1),
+      ])
+    );
   });
 
   it("shouldn't delete user when delete is clicked", async () => {
@@ -52,7 +52,7 @@ describe('Delete User Modal', () => {
 
     fireEvent.click(cancelButton);
 
-    expect(messageText).toBeTruthy();
+    expect(messageText).toBeInTheDocument();
     expect(client.deleteUser).not.toBeCalled();
     expect(handleClose).toBeCalled();
   });
