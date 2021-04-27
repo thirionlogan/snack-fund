@@ -21,6 +21,7 @@ CreateTransactionModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   user: PropTypes.object,
+  handleOpenCreateUserModal: PropTypes.func,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -55,40 +56,37 @@ const useStyles = makeStyles((theme) => ({
   typography: { display: 'flex' },
 }));
 
-function CreateTransactionModal({ open, handleClose, user }) {
+function CreateTransactionModal({
+  open,
+  handleClose,
+  user,
+  handleOpenCreateUserModal,
+  handleOpenDeleteUserModal,
+}) {
   const classes = useStyles();
   const [amount, setAmount] = useState('');
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    const refreshBalance = () => {
-      if (user.id)
-        getUserById(user.id).then(({ data }) => {
-          setBalance(data.balance);
-        });
-    };
-
     setAmount('');
-    refreshBalance();
-  }, [open, user]);
-
-  const refreshBalance = () => {
     if (user.id)
       getUserById(user.id).then(({ data }) => {
         setBalance(data.balance);
       });
-  };
+  }, [open, user]);
 
   const handleChangeAmount = ({ target: { value } }) => {
     if (!isNaN(value)) setAmount(value);
   };
 
   const handleSubmit = (multiplier) => {
-    if (!isNaN(amount))
-      createTransaction(
-        user.id,
-        parseFloat(amount).toFixed(2) * multiplier
-      ).then(refreshBalance);
+    if (amount && !isNaN(amount)) {
+      createTransaction(user.id, parseFloat(amount).toFixed(2) * multiplier)
+        .then(() => getUserById(user.id))
+        .then(({ data }) => {
+          setBalance(data.balance);
+        });
+    }
   };
 
   const balanceColor = () => (balance < 0 ? classes.error : classes.success);
@@ -110,12 +108,15 @@ function CreateTransactionModal({ open, handleClose, user }) {
           </Typography>
           <div>
             <Tooltip title="Edit User" placement="top" arrow>
-              <IconButton aria-label="edit">
+              <IconButton aria-label="edit" onClick={handleOpenCreateUserModal}>
                 <EditIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title="Delete User" placement="top" arrow>
-              <IconButton aria-label="delete">
+              <IconButton
+                aria-label="delete"
+                onClick={handleOpenDeleteUserModal}
+              >
                 <DeleteIcon />
               </IconButton>
             </Tooltip>

@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import DescriptionIcon from '@material-ui/icons/Description';
 import CreateUserModal from '../CreateUserModal/CreateUserModal';
 import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
+import DeleteUserModal from '../DeleteUserModal/DeleteUserModal';
 import { getUsers } from '../../client/client';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
+  const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
   const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(
     false
   );
@@ -47,15 +49,11 @@ function App() {
 
   useEffect(handleGetUsers, []);
 
-  const handleOpenCreateUserModal = () => {
-    setOpenCreateUserModal(true);
-  };
+  const handleOpenCreateUserModal = () => setOpenCreateUserModal(true);
 
-  const handleCloseCreateUserModal = () => {
-    setOpenCreateUserModal(false);
-  };
+  const handleCloseCreateUserModal = () => setOpenCreateUserModal(false);
 
-  const handlesetOpenCreateTransactionModal = (user) => {
+  const handleSetOpenCreateTransactionModal = (user) => {
     setOpenCreateTransactionModal(true);
     setSelectedUser(user);
   };
@@ -65,9 +63,11 @@ function App() {
     setSelectedUser({});
   };
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
+  const handleOpenDeleteUserModal = () => setOpenDeleteUserModal(true);
+
+  const handleCloseDeleteUserModal = () => setOpenDeleteUserModal(false);
+
+  const handleSearch = (e) => setSearch(e.target.value);
 
   return (
     <div className="App">
@@ -97,7 +97,7 @@ function App() {
               variant="contained"
               color="primary"
               className={classes.button}
-              onClick={() => handlesetOpenCreateTransactionModal(user)}
+              onClick={() => handleSetOpenCreateTransactionModal(user)}
             >
               {user.rank + ' ' + user.name}
             </Button>
@@ -125,11 +125,21 @@ function App() {
           open={openCreateUserModal}
           handleClose={handleCloseCreateUserModal}
           handleGetUsers={handleGetUsers}
+          user={selectedUser}
         />
         <CreateTransactionModal
           open={openCreateTransactionModal}
           handleClose={handleCloseCreateTransactionModal}
           user={selectedUser}
+          handleOpenCreateUserModal={handleOpenCreateUserModal}
+          handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+        />
+        <DeleteUserModal
+          open={openDeleteUserModal}
+          handleClose={handleCloseDeleteUserModal}
+          user={selectedUser}
+          handleGetUsers={handleGetUsers}
+          handleCloseCreateTransactionModal={handleCloseCreateTransactionModal}
         />
       </header>
     </div>
