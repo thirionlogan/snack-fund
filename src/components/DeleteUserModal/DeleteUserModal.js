@@ -8,6 +8,8 @@ DeleteUserModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  handleGetUsers: PropTypes.func.isRequired,
+  handleCloseCreateTransactionModal: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -59,8 +61,8 @@ function DeleteUserModal({
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby='simple-modal-title'
-      aria-describedby='simple-modal-description'
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
     >
       <Paper className={classes.paper}>
         <Typography className={classes.caption} gutterBottom>
@@ -68,18 +70,18 @@ function DeleteUserModal({
         </Typography>
         <div className={classes.buttonContainer}>
           <Button
-            variant='contained'
-            color='secondary'
-            size='large'
+            variant="contained"
+            color="secondary"
+            size="large"
             className={classes.button}
             onClick={handleDeleteUser}
           >
             Delete
           </Button>
           <Button
-            variant='contained'
-            color='default'
-            size='large'
+            variant="contained"
+            color="default"
+            size="large"
             className={classes.button}
             onClick={handleClose}
           >

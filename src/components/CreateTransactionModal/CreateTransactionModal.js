@@ -22,6 +22,7 @@ CreateTransactionModal.propTypes = {
   handleClose: PropTypes.func.isRequired,
   user: PropTypes.object,
   handleOpenCreateUserModal: PropTypes.func,
+  handleOpenDeleteUserModal: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +77,7 @@ function CreateTransactionModal({
   }, [open, user]);
 
   const handleChangeAmount = ({ target: { value } }) => {
-    if (!isNaN(value)) setAmount(value);
+    if (!isNaN(value)) setAmount(value.trim());
   };
 
   const handleSubmit = (multiplier) => {

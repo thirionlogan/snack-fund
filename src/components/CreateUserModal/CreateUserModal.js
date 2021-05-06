@@ -15,6 +15,7 @@ CreateUserModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   user: PropTypes.object,
+  handleGetUsers: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -47,11 +48,11 @@ function CreateUserModal({ open, handleClose, handleGetUsers, user }) {
   }, [open, user]);
 
   const handleChangeAmount = ({ target: { value } }) => {
-    if (!isNaN(value) || value === '-') setAmount(value);
+    if (!isNaN(value) || value === '-') setAmount(value.trim());
   };
 
-  const handleChangeName = ({ target: { value } }) => setName(value);
-  const handleChangeRank = ({ target: { value } }) => setRank(value);
+  const handleChangeName = ({ target: { value } }) => setName(value.trim());
+  const handleChangeRank = ({ target: { value } }) => setRank(value.trim());
 
   const handleSubmit = () => {
     if (user.id && name && rank) {
