@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 jest.mock('../../client/client.js');
-
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DeleteUserModal from './DeleteUserModal';
 import client from '../../client/client';

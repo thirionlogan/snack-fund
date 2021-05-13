@@ -691,10 +691,10 @@ module.exports = function (webpackEnv) {
           async: isEnvDevelopment,
           checkSyntacticErrors: true,
           resolveModuleNameModule: process.versions.pnp
-            ? `${__dirname}/pnpTs.js`
+            ? path.resolve('pnpTs.js')
             : undefined,
           resolveTypeReferenceDirectiveModule: process.versions.pnp
-            ? `${__dirname}/pnpTs.js`
+            ? path.resolve('pnpTs.js')
             : undefined,
           tsconfig: paths.appTsConfig,
           reportFiles: [

@@ -1,11 +1,12 @@
 /* eslint-disable import/first */
 jest.mock('../../client/client.js');
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import CreateUserModal from './CreateUserModal';
 import client from '../../client/client';
 
 describe('Create User Modal', () => {
-  let handleClose, handleGetUsers, container;
+  let handleClose, handleGetUsers;
 
   beforeEach(() => {
     handleClose = jest.fn().mockResolvedValue(undefined);
