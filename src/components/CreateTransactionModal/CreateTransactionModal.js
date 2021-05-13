@@ -108,12 +108,12 @@ function CreateTransactionModal({
             </Typography>
           </Typography>
           <div>
-            <Tooltip title="Edit User" placement="top" arrow>
+            <Tooltip title="Edit Account" placement="top" arrow>
               <IconButton aria-label="edit" onClick={handleOpenCreateUserModal}>
                 <EditIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete User" placement="top" arrow>
+            <Tooltip title="Delete Account" placement="top" arrow>
               <IconButton
                 aria-label="delete"
                 onClick={handleOpenDeleteUserModal}

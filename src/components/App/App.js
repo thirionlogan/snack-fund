@@ -75,8 +75,8 @@ function App() {
         <Paper className={classes.search}>
           <InputBase
             className={classes.input}
-            placeholder="Search Users"
-            inputProps={{ 'aria-label': 'search users' }}
+            placeholder="Search Accounts"
+            inputProps={{ 'aria-label': 'search accounts' }}
             onChange={handleSearch}
             value={search}
           />
@@ -110,7 +110,7 @@ function App() {
             onClick={handleOpenCreateUserModal}
           >
             <AddIcon />
-            Add User
+            Add Account
           </Fab>
           <Fab
             variant="extended"

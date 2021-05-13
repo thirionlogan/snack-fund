@@ -74,7 +74,9 @@ function CreateUserModal({ open, handleClose, handleGetUsers, user }) {
       aria-describedby="simple-modal-description"
     >
       <Paper className={classes.paper}>
-        <h2 id="simple-modal-title">{user.id ? 'Edit User' : 'Add User'}</h2>
+        <h2 id="simple-modal-title">
+          {user.id ? 'Edit Account' : 'Add Account'}
+        </h2>
         <div>
           <TextField
             label="Rank"
