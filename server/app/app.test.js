@@ -81,7 +81,7 @@ describe('Endpoints', () => {
 
   describe('/report', () => {
     it('should respond with a report.xlsx', async () => {
-      const response = await request.get('/report');
+      const response = await request.get('/report/2021-04-18/2021-05-18');
       expect(response.statusCode).toBe(200);
     });
   });
@@ -133,7 +133,7 @@ describe('Test Errors', () => {
     expect(response.statusCode).toBe(404);
   });
   it('should respond with 500', async () => {
-    const response = await request.get('/report');
+    const response = await request.get('/report/2021-04-18/2021-05-18');
     expect(response.statusCode).toBe(500);
   });
 });

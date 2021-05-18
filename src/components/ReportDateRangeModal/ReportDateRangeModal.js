@@ -66,6 +66,7 @@ function ReportDateRangeModal({ open, handleClose }) {
             value={startDate}
             onChange={handleChangeStartDate}
             InputLabelProps={{ shrink: true }}
+            inputProps={{ max: endDate }}
           />
           <TextField
             type="date"
@@ -73,6 +74,7 @@ function ReportDateRangeModal({ open, handleClose }) {
             value={endDate}
             onChange={handleChangeEndDate}
             InputLabelProps={{ shrink: true }}
+            inputProps={{ min: startDate, max: moment().format('yyyy-MM-DD') }}
           />
         </div>
         <Button

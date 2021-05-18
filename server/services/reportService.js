@@ -1,9 +1,10 @@
 const { getUsers } = require('./userService');
 const xlsx = require('xlsx');
+const moment = require('moment');
 
 const options = { type: 'buffer', cellDates: true };
 
-const getReport = () => {
+const getReport = (startDate, endDate) => {
   return getUsers(false)
     .then((users) => ({
       Props: {
@@ -46,16 +47,21 @@ const getReport = () => {
             users
               .filter((user) => user.transactions.length > 0)
               .map((user) =>
-                user.transactions.map((transaction) => [
-                  { v: user.rank, t: 's' },
-                  { v: user.name, t: 's' },
-                  {
-                    v: (transaction.amount / 100).toFixed(2),
-                    t: 'n',
-                    z: '$#,##0.00',
-                  },
-                  { v: transaction.created_at, t: 'd', z: 'm/dd/yy' },
-                ])
+                user.transactions
+                  // eslint-disable-next-line camelcase
+                  .filter(({ created_at }) =>
+                    moment(created_at).isBetween(startDate, endDate)
+                  )
+                  .map((transaction) => [
+                    { v: user.rank, t: 's' },
+                    { v: user.name, t: 's' },
+                    {
+                      v: (transaction.amount / 100).toFixed(2),
+                      t: 'n',
+                      z: '$#,##0.00',
+                    },
+                    { v: transaction.created_at, t: 'd', z: 'm/dd/yy' },
+                  ])
               )
               .flat()
           ),

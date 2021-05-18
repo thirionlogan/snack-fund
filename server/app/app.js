@@ -94,8 +94,8 @@ app.post('/transaction/:userId', (req, res) => {
 });
 
 // report
-app.get('/report', (req, res) => {
-  getReport()
+app.get('/report/:startDate/:endDate', (req, res) => {
+  getReport(req.params.startDate, req.params.endDate)
     .then((report) => {
       const fileName =
         'snackfundReport' + new Date().toISOString().slice(0, 10) + '.xlsx';
