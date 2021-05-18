@@ -8,6 +8,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import CreateUserModal from '../CreateUserModal/CreateUserModal';
 import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
 import DeleteUserModal from '../DeleteUserModal/DeleteUserModal';
+import ReportDateRangeModal from '../ReportDateRangeModal/ReportDateRangeModal';
 import { getUsers } from '../../client/client';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +41,9 @@ function App() {
   const [search, setSearch] = useState('');
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
   const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
+  const [openReportDateRangeModal, setOpenReportDateRangeModal] = useState(
+    false
+  );
   const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(
     false
   );
@@ -62,6 +66,11 @@ function App() {
     setOpenCreateTransactionModal(false);
     setSelectedUser({});
   };
+
+  const handleOpenReportDateRangeModal = () =>
+    setOpenReportDateRangeModal(true);
+  const handleCloseReportDateRangeModal = () =>
+    setOpenReportDateRangeModal(false);
 
   const handleOpenDeleteUserModal = () => setOpenDeleteUserModal(true);
 
@@ -115,7 +124,7 @@ function App() {
           <Fab
             variant="extended"
             className={classes.button}
-            href="http://localhost:3001/report"
+            onClick={handleOpenReportDateRangeModal}
           >
             <DescriptionIcon />
             Get Report
@@ -140,6 +149,10 @@ function App() {
           user={selectedUser}
           handleGetUsers={handleGetUsers}
           handleCloseCreateTransactionModal={handleCloseCreateTransactionModal}
+        />
+        <ReportDateRangeModal
+          open={openReportDateRangeModal}
+          handleClose={handleCloseReportDateRangeModal}
         />
       </header>
     </div>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Paper, Modal } from '@material-ui/core';
-import DatePicker from '@material-ui/lab/DatePicker';
+import React, { useState } from 'react';
+import { Button, Paper, Modal, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { getReport } from '../../client/client';
 
@@ -13,6 +13,11 @@ ReportDateRangeModal.propTypes = {
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+  },
+  datepickerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   paper: {
     position: 'absolute',
@@ -29,6 +34,22 @@ const useStyles = makeStyles((theme) => ({
 function ReportDateRangeModal({ open, handleClose }) {
   const classes = useStyles();
 
+  const [startDate, setStartDate] = useState(
+    moment().subtract(1, 'months').format('yyyy-MM-DD')
+  );
+  const [endDate, setEndDate] = useState(moment().format('yyyy-MM-DD'));
+
+  const handleChangeStartDate = ({ target: { value } }) => {
+    setStartDate(value);
+  };
+  const handleChangeEndDate = ({ target: { value } }) => {
+    setEndDate(value);
+  };
+
+  const handleConfirm = () => {
+    getReport(startDate, endDate);
+  };
+
   return (
     <Modal
       open={open}
@@ -38,18 +59,30 @@ function ReportDateRangeModal({ open, handleClose }) {
     >
       <Paper className={classes.paper}>
         <h2 id="simple-modal-title">Report Dates</h2>
-        <div>
-          <DatePicker label="Start Date" />
-          <DatePicker label="End Date" />
+        <div className={classes.datepickerContainer}>
+          <TextField
+            type="date"
+            label="Start Date"
+            value={startDate}
+            onChange={handleChangeStartDate}
+            InputLabelProps={{ shrink: true }}
+          />
+          <TextField
+            type="date"
+            label="End Date"
+            value={endDate}
+            onChange={handleChangeEndDate}
+            InputLabelProps={{ shrink: true }}
+          />
         </div>
         <Button
           variant="contained"
           color="primary"
           size="large"
           className={classes.button}
-          // onClick={handleConfirm}
+          onClick={handleConfirm}
         >
-          Save
+          Confirm
         </Button>
       </Paper>
     </Modal>

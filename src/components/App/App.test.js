@@ -37,6 +37,14 @@ jest.mock(
   }
 );
 
+jest.mock(
+  '../ReportDateRangeModal/ReportDateRangeModal.js',
+  () => ({ open, handleClose }) => {
+    handleClose();
+    return <div>Report Date Range Modal</div>;
+  }
+);
+
 describe('App', () => {
   beforeEach(() => {
     client.getUsers = jest.fn().mockResolvedValue({
@@ -54,7 +62,6 @@ describe('App', () => {
     await waitFor(() => expect(client.getUsers).toBeCalled());
     const snuffy = screen.getByRole('button', { name: /a1c snuffy/i });
     const shawesome = screen.getByRole('button', { name: /sra shawesome/i });
-    const getReport = screen.getByRole('link', { name: /get report/i });
     const addUser = screen.getByRole('button', { name: /add account/i });
 
     fireEvent.click(addUser);
@@ -73,10 +80,6 @@ describe('App', () => {
       Promise.all([
         expect(snuffy).toBeInTheDocument(),
         expect(shawesome).toBeInTheDocument(),
-        expect(getReport).toHaveAttribute(
-          'href',
-          expect.stringMatching(/http:\/\/.+\/report/i)
-        ),
       ])
     );
   });
@@ -84,8 +87,15 @@ describe('App', () => {
   it('should narrow the list on search', async () => {
     await waitFor(() => expect(client.getUsers).toBeCalled());
     const search = screen.getByRole('textbox', { name: /search accounts/i });
-    await waitFor(() => expect(screen.getAllByRole('button')).toHaveLength(6));
+    await waitFor(() => expect(screen.getAllByRole('button')).toHaveLength(7));
     fireEvent.change(search, { target: { value: 'S' } });
-    await waitFor(() => expect(screen.getAllByRole('button')).toHaveLength(4));
+    await waitFor(() => expect(screen.getAllByRole('button')).toHaveLength(5));
+  });
+
+  it('should get a report', async () => {
+    const getReport = screen.getByRole('button', { name: /get report/i });
+    fireEvent.click(getReport);
+    const ReportDateRangeModal = screen.getByText('Report Date Range Modal');
+    await waitFor(() => expect(ReportDateRangeModal).toBeInTheDocument());
   });
 });
