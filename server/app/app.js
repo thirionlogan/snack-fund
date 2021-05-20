@@ -95,10 +95,10 @@ app.post('/transaction/:userId', (req, res) => {
 
 // report
 app.get('/report/:startDate/:endDate', (req, res) => {
-  getReport(req.params.startDate, req.params.endDate)
+  const { startDate, endDate } = req.params;
+  getReport(startDate, endDate)
     .then((report) => {
-      const fileName =
-        'snackfundReport' + new Date().toISOString().slice(0, 10) + '.xlsx';
+      const fileName = 'snackfundReport' + startDate + 'to' + endDate + '.xlsx';
       res.set('Content-disposition', 'attachment; filename=' + fileName);
       res.set('Content-Type', 'text/plain');
       res.status(200);

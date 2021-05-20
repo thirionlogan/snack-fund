@@ -6,6 +6,7 @@ describe('middleware.ErrorHandler', () => {
   const next = jest.fn();
 
   beforeEach(() => {
+    global.console = { error: jest.fn() };
     req = {
       params: {},
       body: {},
@@ -34,5 +35,6 @@ describe('middleware.ErrorHandler', () => {
 
     expect(res.data).toBeDefined();
     expect(res.data).toBe('Something broke!');
+    expect(console.error).toBeCalled();
   });
 });

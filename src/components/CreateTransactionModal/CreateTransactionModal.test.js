@@ -1,7 +1,13 @@
 /* eslint-disable import/first */
 jest.mock('../../client/client.js');
 import React from 'react';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  screen,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import CreateTransactionModal from './CreateTransactionModal';
 import client from '../../client/client';
 
@@ -18,17 +24,20 @@ describe('Create Trabsaction Modal', () => {
   });
 
   describe('When the user is selected', () => {
-    beforeEach(() => {
-      render(
-        <CreateTransactionModal
-          open={true}
-          user={user}
-          handleClose={handleClose}
-          handleOpenCreateUserModal={handleOpenCreateUserModal}
-          handleOpenDeleteUserModal={handleOpenDeleteUserModal}
-        />
-      );
+    beforeEach(async () => {
+      await act(async () => {
+        render(
+          <CreateTransactionModal
+            open={true}
+            user={user}
+            handleClose={handleClose}
+            handleOpenCreateUserModal={handleOpenCreateUserModal}
+            handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+          />
+        );
+      });
     });
+
     it('should deposit amount', async () => {
       await waitFor(() => expect(client.getUserById).toBeCalledWith(1));
 
@@ -37,17 +46,15 @@ describe('Create Trabsaction Modal', () => {
       const amountInput = screen.getByRole('textbox');
       const depositButton = screen.getByRole('button', { name: /deposit/i });
 
+      // await act(async () => {
       fireEvent.change(amountInput, { target: { value: 'not a number' } });
       fireEvent.change(amountInput, { target: { value: '5' } });
       fireEvent.click(depositButton);
+      // });
 
-      await waitFor(() =>
-        Promise.all([
-          expect(messageText).toBeInTheDocument(),
-          expect(amountText).toBeInTheDocument(),
-          expect(client.createTransaction).toBeCalledWith(1, 500),
-        ])
-      );
+      expect(messageText).toBeInTheDocument();
+      expect(amountText).toBeInTheDocument();
+      expect(client.createTransaction).toBeCalledWith(1, 500);
     });
 
     it('should withdraw amount', async () => {
@@ -58,16 +65,14 @@ describe('Create Trabsaction Modal', () => {
       const amountInput = screen.getByRole('textbox');
       const withdrawButton = screen.getByRole('button', { name: /withdraw/i });
 
+      // act(() => {
       fireEvent.change(amountInput, { target: { value: '5' } });
       fireEvent.click(withdrawButton);
+      // });
 
-      await waitFor(() =>
-        Promise.all([
-          expect(messageText).toBeInTheDocument(),
-          expect(amountText).toBeInTheDocument(),
-          expect(client.createTransaction).toBeCalledWith(1, -500),
-        ])
-      );
+      expect(client.createTransaction).toBeCalledWith(1, -500);
+      expect(messageText).toBeInTheDocument();
+      expect(amountText).toBeInTheDocument();
     });
 
     it('should not create an incorrect transaction', async () => {

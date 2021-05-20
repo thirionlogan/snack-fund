@@ -103,7 +103,7 @@ function CreateTransactionModal({
         <div className={classes.upperControls}>
           <Typography className={classes.typography}>
             You have{' '}
-            <Typography className={balanceColor()}>
+            <Typography component="span" className={balanceColor()}>
               ${(balance / 100).toFixed(2)}
             </Typography>
           </Typography>

@@ -9,12 +9,17 @@
         "standard",
         "prettier",
         "plugin:react/recommended",
-        "plugin:jsx-a11y/recommended"
+        "plugin:jsx-a11y/recommended"      
     ],
     "parserOptions": {
         "ecmaVersion": 12
     },
     "plugins": ["jest", "react","jsx-a11y"],
     "rules": {
+    },
+    "settings": {
+        "react":{
+            "version": "detect"
+        }
     }
 }
