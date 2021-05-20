@@ -23,12 +23,14 @@ describe('ReportDateRangeModal', () => {
       new RegExp(moment().format('yyyy-MM-DD'))
     );
 
-    const confirmButton = screen.getByRole('button', { name: /confirm/i });
+    const confirmButton = screen.getByRole('link', { name: /confirm/i });
 
     fireEvent.change(startDatePicker, { target: { value: '2021-04-01' } });
     fireEvent.change(endDatePicker, { target: { value: '2021-04-20' } });
     fireEvent.click(confirmButton);
-
-    expect(client.getReport).toBeCalledWith('2021-04-01', '2021-04-20');
+    expect(confirmButton).toHaveAttribute(
+      'href',
+      expect.stringMatching(/http:\/\/.+\/report\/2021-04-01\/2021-04-20/i)
+    );
   });
 });

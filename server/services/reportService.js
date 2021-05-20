@@ -50,7 +50,12 @@ const getReport = (startDate, endDate) => {
                 user.transactions
                   // eslint-disable-next-line camelcase
                   .filter(({ created_at }) =>
-                    moment(created_at).isBetween(startDate, endDate)
+                    moment(created_at).isBetween(
+                      startDate,
+                      endDate,
+                      'day',
+                      '[]'
+                    )
                   )
                   .map((transaction) => [
                     { v: user.rank, t: 's' },

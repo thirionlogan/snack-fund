@@ -12,8 +12,6 @@ const client = {
   deleteUser: (id) => instance.delete(`/user/${id}`),
   createTransaction: (userId, amount) =>
     instance.post(`/transaction/${userId}`, { amount }),
-  getReport: (startDate, endDate) =>
-    instance.get(`/report/${startDate}/${endDate}`),
 };
 
 module.exports = client;

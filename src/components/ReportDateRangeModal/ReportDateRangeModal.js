@@ -3,7 +3,6 @@ import { Button, Paper, Modal, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { getReport } from '../../client/client';
 
 ReportDateRangeModal.propTypes = {
   open: PropTypes.bool.isRequired,
@@ -46,10 +45,6 @@ function ReportDateRangeModal({ open, handleClose }) {
     setEndDate(value);
   };
 
-  const handleConfirm = () => {
-    getReport(startDate, endDate);
-  };
-
   return (
     <Modal
       open={open}
@@ -82,7 +77,7 @@ function ReportDateRangeModal({ open, handleClose }) {
           color="primary"
           size="large"
           className={classes.button}
-          onClick={handleConfirm}
+          href={`http://localhost:3001/report/${startDate}/${endDate}`}
         >
           Confirm
         </Button>
