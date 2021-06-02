@@ -77,6 +77,4 @@ const getReport = (startDate, endDate) => {
     .then((workBook) => xlsx.write(workBook, options));
 };
 
-console.log('test');
-
 module.exports = { getReport };
