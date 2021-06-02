@@ -78,7 +78,7 @@
     "rollback": "npx knex migrate:rollback --knexfile ./server/knexfile.js",
     "seed": "npx knex seed:run --knexfile ./server/knexfile.js",
     "format": "npx prettier --write .",
-    "lint": "npx eslint --fix ."
+    "lint": "npx eslint . --fix --format table"
   },
   "eslintConfig": {
     "extends": [
