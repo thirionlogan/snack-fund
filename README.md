@@ -10,6 +10,7 @@
 - Pull the app from github with `git clone https://github.com/thirionlogan/snack-fund.git`
 - Navigate to th project directory with `cd snack-fund`
 - Install all of the dependencies with `npm install`
+- Set up git hooks with `npm run hooks`
 - Migrate the database with `npm run migrate`
 - Seed the database with `npm run seed`
 - Start the back end with `npm run server`
@@ -79,7 +80,8 @@ Seeds a migrated database with some sample data. **This will delete all previous
 
 # How it works
 
-- package.json
+- [NPM](https://www.npmjs.com/)
+  - [package.json](/package.json)
   - modules/dependencies
     - Babel/webpack
     - what is the difference between dependencies and dev dependencies
