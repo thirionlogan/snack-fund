@@ -59,6 +59,10 @@ Rolls back all database migrations. **This will delete all data in the database.
 
 Seeds a migrated database with some sample data. **This will delete all previous data.**
 
+### `npm run hooks`
+
+Sets up git hooks on your machine so that all code committed meets standards and all code pushed passes all tests.
+
 # Extreme Programming
 
 Extreme programming (XP) is an agile software development methodology used to implement software projects. This article details the practices used in this methodology. Extreme programming has 12 practices, grouped into four areas, derived from the best practices of software engineering.
@@ -128,10 +132,10 @@ The developers sort the user stories by risk. They also categorize into three pi
     - low (0)
     - medium (1)
     - high (2)
-- Complexity (how hard is it to build?)
-  - simple (0)
-  - standard (1)
-  - complex (2)
+  - Complexity (how hard is it to build?)
+    - simple (0)
+    - standard (1)
+    - complex (2)
 
 All indexes for a user story are added, assigning the user stories a risk index of low (0–1), medium (2–4), or high (5–6).
 
@@ -251,6 +255,7 @@ Well-tested, continuously integrated, frequently deployed code and environments 
   - dev
   - design
   - PM
+- code coverage
 
 # How it works
 
