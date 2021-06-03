@@ -39,18 +39,14 @@ describe('Create Trabsaction Modal', () => {
     });
 
     it('should deposit amount', async () => {
-      await waitFor(() => expect(client.getUserById).toBeCalledWith(1));
-
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$10\.00/i);
       const amountInput = screen.getByRole('textbox');
       const depositButton = screen.getByRole('button', { name: /deposit/i });
 
-      // await act(async () => {
       fireEvent.change(amountInput, { target: { value: 'not a number' } });
       fireEvent.change(amountInput, { target: { value: '5' } });
       fireEvent.click(depositButton);
-      // });
 
       expect(messageText).toBeInTheDocument();
       expect(amountText).toBeInTheDocument();
@@ -58,17 +54,13 @@ describe('Create Trabsaction Modal', () => {
     });
 
     it('should withdraw amount', async () => {
-      await waitFor(() => expect(client.getUserById).toBeCalledWith(1));
-
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$10\.00/i);
       const amountInput = screen.getByRole('textbox');
       const withdrawButton = screen.getByRole('button', { name: /withdraw/i });
 
-      // act(() => {
       fireEvent.change(amountInput, { target: { value: '5' } });
       fireEvent.click(withdrawButton);
-      // });
 
       expect(client.createTransaction).toBeCalledWith(1, -500);
       expect(messageText).toBeInTheDocument();
@@ -76,8 +68,6 @@ describe('Create Trabsaction Modal', () => {
     });
 
     it('should not create an incorrect transaction', async () => {
-      await waitFor(() => expect(client.getUserById).toBeCalledWith(1));
-
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$10\.00/i);
       const depositButton = screen.getByRole('button', { name: /deposit/i });
@@ -129,8 +119,6 @@ describe('Create Trabsaction Modal', () => {
       );
     });
     it('should deposit amount', async () => {
-      await waitFor(() => expect(client.getUserById).toBeCalledWith(1));
-
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$-10\.00/i);
 

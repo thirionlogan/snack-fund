@@ -70,11 +70,8 @@ function CreateTransactionModal({
 
   useEffect(() => {
     setAmount('');
-    if (user.id)
-      getUserById(user.id).then(({ data }) => {
-        setBalance(data.balance);
-      });
-  }, [open, user]);
+    setBalance(user.balance);
+  }, [open]);
 
   const handleChangeAmount = ({ target: { value } }) => {
     if (!isNaN(value)) setAmount(value.trim());
