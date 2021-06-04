@@ -18,7 +18,7 @@
 
 # Available Scripts
 
-In the project directory, you can run:
+These scripts can be run in the project directory.
 
 ### `npm start`
 
@@ -30,12 +30,12 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+This script launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+This script builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified, and the filenames include the hashes.\
@@ -49,15 +49,15 @@ Runs the back end
 
 ### `npm run migrate`
 
-Runs all database migrations that haven't been run yet.
+This script runs all database migrations.
 
 ### `npm run rollback`
 
-Rolls back all database migrations. **This will delete all data in the database.**
+This script rolls back all database migrations. **This will delete all data in the database.**
 
 ### `npm run seed`
 
-Seeds a migrated database with some sample data. **This will delete all previous data.**
+This script seeds a migrated database with some sample data. **This will delete all previous data.**
 
 ### `npm run hooks`
 
@@ -67,11 +67,31 @@ Sets up git hooks on your machine so that all code committed meets standards and
 
 Extreme programming (XP) is an agile software development methodology used to implement software projects. This article details the practices used in this methodology. Extreme programming has 12 practices, grouped into four areas, derived from software engineering best practices.
 
+## Roles
+
+### **Developer**
+
+The developer role on the team involves producing and testing code functionality within the application. As a developer, you will ensure that the codebase is well structured and efficiently replicates the desired functionality as per the stories given. You will familiarize yourself with the coding best practices and deliver a
+
+Produce and test functionality / programming languages / structure codebase
+
+### **Designer**
+
+The designer role on the team
+
+Customer/stakeholder interaction / mock ups / UX/UI design
+
+### **Product Manager**
+
+The product manager role on the team
+
+Backlog management / customer/stakeholder interaction / deploy versions / test development evironments
+
 ## Fine scale feedback
 
 ### **Pair programming**
 
-Pair programming means that all code is produced by two people programming on one task on one workstation. One programmer has control over the workstation and is mainly thinking about the coding in detail. The other programmer is more focused on the big picture and is continually reviewing the code produced by the first programmer. Programmers trade roles after minute to hour periods.
+Pair programming means that two people produce all code, programming on one task on one workstation. One programmer has control over the workstation and is mainly thinking about the coding in detail. The other programmer is more focused on the big picture and continually reviews the code produced by the first programmer. Programmers trade roles after minute to hour periods.
 
 The pairs are not fixed; programmers switch partners frequently so that everyone knows what everyone is doing. Everybody remains familiar with the whole system, even the parts outside their skill set. This way, pair programming also can enhance team-wide communication. (This also goes hand-in-hand with the concept of Collective Ownership).
 
@@ -88,7 +108,7 @@ The primary planning process within extreme programming is called the Planning G
   - Commitment Phase: The tasks will be assigned to the programmers, and the time it takes to complete will be estimated.
   - Steering Phase: The tasks are performed, and the result is matched with the original user story.
 
-The purpose of the Planning Game is to guide the product into delivery. Instead of predicting the exact dates of when deliverables will be needed and produced, which is challenging to do, it aims to "steer the project" into delivery using a straightforward approach. The Planning Game approach has also been adopted by non-software projects and teams in the context of business agility.
+The purpose of the Planning Game is to guide the product into delivery. Instead of predicting the exact dates of when deliverables will be needed and produced, which is challenging to do, it aims to "steer the project" into delivery using a straightforward approach. Non-software projects and teams have also adopted the Planning Game approach in the context of business agility.
 
 #### **Release planning**
 
@@ -159,8 +179,8 @@ The exploration phase of the iteration planning is about creating tasks and esti
 
 Within the commitment phase of the iteration planning, programmers are assigned tasks that reference the different user stories.
 
-- A programmer accepts a task: Each programmer picks a task for which he or she takes responsibility.
-- Programmer estimates the task: Because the programmer is now responsible for the task, he or she should give the eventual estimation of the task.
+- A programmer accepts a task: Each programmer picks a task for which they take responsibility.
+- Programmer estimates the task: Because the programmer is now responsible for the task, they should give the eventual estimation of the task.
 - Set load factor: The load factor represents the ideal amount of hands-on development time per programmer within one iteration. For example, in a 40-hour week, with 5 hours dedicated to meetings, this would be no more than 35 hours.
 - Balancing: When all programmers within the team have been assigned tasks, a comparison is made between the estimated time of the tasks and the load factor. Then the tasks are balanced out among the programmers. If a programmer is overcommitted, other programmers must take over some of his or her tasks and vice versa.
 
@@ -168,7 +188,7 @@ Within the commitment phase of the iteration planning, programmers are assigned 
 
 The implementation of the tasks is done during the steering phase of the iteration.
 
-- Get a task card: The programmer gets the task card for one of the tasks to which he or she has committed.
+- Get a task card: The programmer gets the task card for one of the tasks they have committed.
 - Find a Partner: The programmer will implement this task along with another programmer. This is further discussed in the practice of Pair Programming.
 - Design the task: If needed, the programmers will design the functionality of the task.
 - Implement the task using Test-driven development (TDD) (see below)
@@ -176,17 +196,24 @@ The implementation of the tasks is done during the steering phase of the iterati
 
 #### **Test driven development**
 
-Unit tests are automated tests that test the functionality of pieces of the code (e.g., classes, methods). Within XP, unit tests are written before the eventual code is coded. This approach is intended to stimulate the programmer to think about conditions in which their code could fail. XP says that the programmer is finished with a specific piece of code when he or she cannot come up with any additional conditions under which the code may fail.
+Unit tests are automated tests that test the functionality of pieces of the code (e.g., classes, methods). Within XP, unit tests are written before the eventual code is coded. This approach is intended to stimulate the programmer to think about conditions in which their code could fail. XP says that the programmer is finished with a specific piece of code when they cannot come up with any additional conditions under which the code may fail.
 
-Test-driven development proceeds by quickly cycling through the following steps, with each step taking minutes at most, preferably much less. Since each user story will usually require one to two days of work, many such cycles will be necessary for each story.
+Test-driven development proceeds by cycling quickly through the following steps. Each step takes minutes at most, preferably much less. Since each user story will usually require one to two days of work, many such cycles will be necessary.
 
-- Write unit test: The programmers write a minimal test that should fail because the functionality hasn't been fully implemented in the production code.
+- Write unit test: The programmers write a minimal test that should fail because the functionality has not been fully implemented in the production code.
 - Watch the new test fail: The programmers verify the test does indeed fail. While it may seem like a waste of time, this step is critical because it proves that your belief about the state of the production code is correct. If the test does not fail, the programmers should determine whether there is a bug in the test code or that the production code does support the functionality described by the new test.
 - Write code: The programmers write just enough production code so the new test will pass.
 - Run test: The unit tests are executed to verify that the new production code passes the new test and that no other tests fail.
 - Refactor: Remove any code smells from both the production and test code.
 
 For a more extreme version of the above process, see Uncle Bob's Three Rules of TDD.
+
+#### **Integration tests**
+
+[End to end (integration) testing]()
+
+- [UI Unit testing](https://testing-library.com/docs/guiding-principles)
+- code coverage
 
 #### **Whole team**
 
@@ -216,11 +243,11 @@ Extreme Programming backers advocate code that is self-documenting to the furthe
 
 #### **Collective code ownership**
 
-Collective code ownership (also known as "team code ownership" and "shared code") means that everyone is responsible for all the code; therefore, everybody is allowed to change any part of the code. Collective code ownership is not only an organizational policy but also a feeling. "Developers feel team code ownership more when they understand the system context, have contributed to the code in question, perceive code quality as high, believe the product will satisfy the user needs, and perceive high team cohesion." Pair programming, significantly overlapping pair rotation, contributes to this practice: by working in different pairs, programmers better understand the system context and contribute to more areas of the codebase.
+Collective code ownership (also known as "team code ownership" and "shared code") means that everyone is responsible for all the code; therefore, everybody is allowed to change any part of the code. Collective code ownership is not only an organizational policy but also a feeling. "Developers feel team code ownership more when they understand the system context, have contributed to the code in question, perceive code quality as high, believe the product will satisfy the user needs, and perceive high team cohesion." Pair programming, significantly overlapping pair rotation, contributes to this practice. By working in different pairs, programmers better understand the system context and contribute to more areas of the codebase.
 
-Collective code ownership may accelerate development because a developer who spots an error can fix it immediately, reducing bugs overall. However, programmers may also introduce bugs when changing code that they do not understand well. Sufficiently well-defined unit tests should mitigate this problem: if unforeseen dependencies create errors, then when unit tests are run, they will show failures.
+Collective code ownership may accelerate development because a developer who spots an error can fix it immediately, reducing bugs overall. However, programmers may also introduce bugs when changing code that they do not understand well. Sufficiently well-defined unit tests should mitigate this problem. If unforeseen dependencies create errors, then when unit tests are run, they will show failures.
 
-Collective code ownership may lead to better member backup, more excellent distribution of knowledge and learning, shared responsibility of the code, more outstanding code quality, and reduced rework. But it may as well lead to increased member conflict, an increase of bugs, changes of developers' mental flow and breaks of their reasoning, increased development time, or less understanding of the code.
+Collective code ownership may lead to better member backup, more excellent distribution of knowledge and learning, shared responsibility of the code, more outstanding code quality, and reduced rework. However, it may also lead to increased member conflict, an increase of bugs, changes of developers' mental flow and breaks of their reasoning, increased development time, or less understanding of the code.
 
 #### **Simple design**
 
@@ -228,7 +255,7 @@ Programmers should take a "simple is best" approach to software design. Whenever
 
 #### **System metaphor**
 
-The system metaphor is a story that everyone - customers, programmers, and managers - can tell about how the system works. It's a naming concept for classes and methods that should make it easy for a team member to guess the functionality of a particular class/method from its name only. For example, a library system may create loan_records(class) for borrowers(class), and if the item were to become overdue, it might perform a make_overdue operation on a catalog (class). For each class or operation, the functionality is evident to the entire team.
+The system metaphor is a story that everyone - customers, programmers, and managers - can tell about how the system works. It is a naming concept for classes and methods that should make it easy for a team member to guess the functionality of a particular class/method from its name only. For example, a library system may create loan_records(class) for borrowers(class). If the item were to become overdue, it might perform a make_overdue operation on a catalog (class). For each class or operation, the functionality is evident to the entire team.
 
 ### **Programmer welfare**
 
@@ -242,12 +269,6 @@ A key enabler to achieve sustainable pace is frequent code-merge and always exec
 
 Well-tested, continuously integrated, frequently deployed code and environments also minimize the frequency of unexpected production problems and outages and the associated after-hours nights and weekends work that is required.
 
-- testing paradigms
-  - [Unit testing]()
-  - [UI Unit testing](https://testing-library.com/docs/guiding-principles)
-  - [End to end (integration) testing]()
-  - code coverage
-  <!-- TODO -->
 - [git practices](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
 - team meetings
   - Retro
@@ -263,7 +284,7 @@ Well-tested, continuously integrated, frequently deployed code and environments 
 
 # How it works
 
-In this section, the technical details of this app are explained. The various tools and modules that are used are described here as well.
+In this section, the technical details of this app are explained. The various tools and modules used in the application are described here as well.
 
 ## npm
 
