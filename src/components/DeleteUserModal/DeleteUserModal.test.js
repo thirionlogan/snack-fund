@@ -46,7 +46,7 @@ describe('Delete User Modal', () => {
     );
   });
 
-  it("shouldn't delete user when delete is clicked", async () => {
+  it("shouldn't delete user when delete is clicked", () => {
     const cancelButton = screen.getByText('Cancel');
     const messageText = screen.getByText(expectedText);
 

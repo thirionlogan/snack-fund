@@ -6,6 +6,7 @@
         "jest/globals": true
     },
     "extends": [
+        "eslint:recommended",
         "standard",
         "prettier",
         "plugin:react/recommended",
@@ -16,6 +17,13 @@
     },
     "plugins": ["jest", "react","jsx-a11y"],
     "rules": {
+        "complexity": "error",
+        "require-await": "error",
+        "yoda": "error",
+        "no-shadow": "error",
+        "no-use-before-define": "error",
+        "no-undef-init": "error",
+        "no-var": "error"
     },
     "settings": {
         "react":{

@@ -14,7 +14,7 @@ import App from './App';
 import client from '../../client/client';
 
 describe('App', () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     client.getUsers = jest.fn().mockResolvedValue({
       data: [
         { id: 3, name: 'Mark', rank: 'GS10' },
@@ -31,7 +31,7 @@ describe('App', () => {
         balance: 1000,
       },
     });
-    await act(async () => {
+    act(() => {
       render(<App />);
     });
   });

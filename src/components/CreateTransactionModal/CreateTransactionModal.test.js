@@ -25,7 +25,7 @@ describe('Create Trabsaction Modal', () => {
 
   describe('When the user is selected', () => {
     beforeEach(async () => {
-      await act(async () => {
+      await act(() => {
         render(
           <CreateTransactionModal
             open={true}
@@ -38,7 +38,7 @@ describe('Create Trabsaction Modal', () => {
       });
     });
 
-    it('should deposit amount', async () => {
+    it('should deposit amount', () => {
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$10\.00/i);
       const amountInput = screen.getByRole('textbox');
@@ -53,7 +53,7 @@ describe('Create Trabsaction Modal', () => {
       expect(client.createTransaction).toBeCalledWith(1, 500);
     });
 
-    it('should withdraw amount', async () => {
+    it('should withdraw amount', () => {
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$10\.00/i);
       const amountInput = screen.getByRole('textbox');
