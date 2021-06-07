@@ -1,7 +1,10 @@
 {
   "name": "snack-fund",
   "version": "0.1.0",
-  "author": "Logan Thirion",
+  "authors": [
+    "Logan Thirion",
+    "Zachary Headlee"
+  ],
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
