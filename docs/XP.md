@@ -6,15 +6,15 @@ Extreme programming (XP) is an agile software development methodology used to im
 
 ### **Developer**
 
-The developer role on the team involves producing and testing code functionality within the application. As a developer, you will ensure that the codebase is well structured and efficiently replicates the desired functionality as per the stories given. You will familiarize yourself with the coding best practices and ensure that production code is fully tested.
+The developer role on the team involves producing and testing code functionality within the application. Developers ensure that the codebase is well structured and efficiently replicates the desired functionality per the stories given. In addition, developers familiarize themselves with the coding best practices and thoroughly test the production code.
 
 ### **Designer**
 
-The designer role on the team is the owner of the product's "vision". You will frequently interact with stakeholders and end users to mock up visuals and functionality for the end product. As the individuals that gather data and validate product usability, designers act as the on-team advocate for the end user.
+The designer role on the team is the owner of the product's "vision." Designers frequently interact with stakeholders and end-users to mock-up visuals and functionality for the end product. As individuals who gather data and validate product usability, designers act as the on-team advocates for the end-user.
 
 ### **Product Manager**
 
-The product manager role on the team focuses more on current reality of the project. You will chart the course towards the project's "vision" by removing roadblocks to create an efficient and focused work environment. On top of mediating with stakeholders, the project manager is also responsible for creating user stories from the designer's mockups and prioritzing the development backlog.
+The product manager role on the team focuses more on the current reality of the project. Product managers chart the course towards the project's "vision" by removing roadblocks to create an efficient and focused work environment. On top of mediating with stakeholders, the project manager is also responsible for creating user stories from the designer's mock-ups and prioritizing the development backlog.
 
 ## Fine scale feedback
 
@@ -22,7 +22,7 @@ The product manager role on the team focuses more on current reality of the proj
 
 Pair programming means that two people produce all code, programming on one task on one workstation. One programmer has control over the workstation and is mainly thinking about the coding in detail. The other programmer is more focused on the big picture and continually reviews the code produced by the first programmer. Programmers trade roles after minute to hour periods.
 
-The pairs are not fixed; programmers switch partners frequently so that everyone knows what everyone is doing. Everybody remains familiar with the whole system, even the parts outside their skill set. This way, pair programming also can enhance team-wide communication. (This also goes hand-in-hand with the concept of Collective Ownership).
+The pairs are not fixed; programmers switch partners frequently so that everyone knows what everyone is doing. Thus, everybody remains familiar with the whole system, even the parts outside their skill set. This way, pair programming also can enhance team-wide communication. (This also goes hand-in-hand with the concept of Collective Ownership).
 
 ### **Planning game**
 
@@ -58,7 +58,7 @@ This phase involves the determination of costs, benefits, and schedule impact. I
 - Sort by Value: Business sorts the user stories by Business Value.
 - Sort by Risk: Development sorts the stories by risk.
 - Set Velocity: Development determines at what speed they can perform the project.
-- Choose scope: The user stories that will be finished in the next release will be picked. Based on the user stories, the release date is determined.
+- Choose scope: The user stories that will be finished in the next release will be picked. Then, based on the user stories, the release date is determined.
 
 #### **Sort by value**
 
@@ -139,10 +139,10 @@ For a more extreme version of the above process, see Uncle Bob's Three Rules of 
 
 #### **Integration tests**
 
-[End to end (integration) testing]()
+[End to end (integration) testing](https://letmegooglethat.com/?q=Integration+testing)
 
 - [UI Unit testing](https://testing-library.com/docs/guiding-principles)
-- code coverage
+- [code coverage](/coverage/lcov-report/index.html)
 
 #### **Whole team**
 
@@ -160,7 +160,7 @@ Because XP doctrine advocates programming only what is needed today and implemen
 
 #### **Small releases**
 
-The delivery of the software is done via frequent releases of live functionality, creating tangible value. The small releases help the customer to gain confidence in the progress of the project. This helps maintain the concept of the whole team as the customer can now come up with his suggestions on the project based on experience.
+The delivery of the software is done via frequent releases of live functionality, creating tangible value. The minor releases help the customer to gain confidence in the progress of the project. This helps maintain the concept of the whole team as the customer can now come up with his suggestions on the project based on experience.
 
 ### **Shared understanding**
 
@@ -174,7 +174,7 @@ Extreme Programming backers advocate code that is self-documenting to the furthe
 
 Collective code ownership (also known as "team code ownership" and "shared code") means that everyone is responsible for all the code; therefore, everybody is allowed to change any part of the code. Collective code ownership is not only an organizational policy but also a feeling. "Developers feel team code ownership more when they understand the system context, have contributed to the code in question, perceive code quality as high, believe the product will satisfy the user needs, and perceive high team cohesion." Pair programming, significantly overlapping pair rotation, contributes to this practice. By working in different pairs, programmers better understand the system context and contribute to more areas of the codebase.
 
-Collective code ownership may accelerate development because a developer who spots an error can fix it immediately, reducing bugs overall. However, programmers may also introduce bugs when changing code that they do not understand well. Sufficiently well-defined unit tests should mitigate this problem. If unforeseen dependencies create errors, then when unit tests are run, they will show failures.
+Collective code ownership may accelerate development because a developer who spots an error can fix it immediately, reducing bugs overall. However, programmers may also introduce bugs when changing code that they do not understand well. Sufficiently well-defined unit tests should mitigate this problem. In addition, if unforeseen dependencies create errors, then when unit tests are run, they will show failures.
 
 Collective code ownership may lead to better member backup, more excellent distribution of knowledge and learning, shared responsibility of the code, more outstanding code quality, and reduced rework. However, it may also lead to increased member conflict, an increase of bugs, changes of developers' mental flow and breaks of their reasoning, increased development time, or less understanding of the code.
 
@@ -184,7 +184,7 @@ Programmers should take a "simple is best" approach to software design. Whenever
 
 #### **System metaphor**
 
-The system metaphor is a story that everyone - customers, programmers, and managers - can tell about how the system works. It is a naming concept for classes and methods that should make it easy for a team member to guess the functionality of a particular class/method from its name only. For example, a library system may create loan_records(class) for borrowers(class). If the item were to become overdue, it might perform a make_overdue operation on a catalog (class). For each class or operation, the functionality is evident to the entire team.
+The system metaphor is a story that everyone - customers, programmers, and managers - can tell about how the system works. It is a naming concept for classes and methods that should make it easy for a team member to guess the functionality of a particular class/method from its name only. For example, a library system may create loan_records(class) for borrowers(class). Then, if the item were to become overdue, it might perform a make_overdue operation on a catalog (class). For each class or operation, the functionality is evident to the entire team.
 
 ### **Programmer welfare**
 
@@ -197,3 +197,7 @@ Also included in this concept is that people perform best and most creatively if
 A key enabler to achieve sustainable pace is frequent code-merge and always executable & test-covered high-quality code. The constant refactoring way of working enforces team members with fresh and alert minds. The intense collaborative way of working within the team drives a need to recharge over weekends.
 
 Well-tested, continuously integrated, frequently deployed code and environments also minimize the frequency of unexpected production problems and outages and the associated after-hours nights and weekends work that is required.
+
+- [git practices](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
+- accessibility
+- security

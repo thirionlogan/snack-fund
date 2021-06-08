@@ -62,12 +62,3 @@ This script seeds a migrated database with some sample data. **This will delete 
 ### `npm run hooks`
 
 Sets up git hooks on your machine so that all code committed meets standards and all code pushed passes all tests.
-
-- [git practices](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
-- team meetings
-  - Retro
-  - Stand up
-- the backlog
-  - wireframes / designs
-- accessibility
-- security
