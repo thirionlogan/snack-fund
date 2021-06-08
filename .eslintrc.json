@@ -23,7 +23,8 @@
         "no-shadow": "error",
         "no-use-before-define": "error",
         "no-undef-init": "error",
-        "no-var": "error"
+        "no-var": "error",
+        "prefer-arrow-callback": [ "error", { "allowNamedFunctions": true } ] 
     },
     "settings": {
         "react":{
