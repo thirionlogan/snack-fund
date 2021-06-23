@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "packageManager": "npm",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress"
+  ],
+  "ignorePatterns": [
+    "coverage",
+    "docs",
+    "hooks",
+    "scripts",
+    "public",
+    "index.js",
+    "server.js",
+    "reportWebVitals.js"
+  ],
+  "testRunner": "jest",
+  "coverageAnalysis": "perTest"
+}
