@@ -71,7 +71,7 @@ function CreateTransactionModal({
   useEffect(() => {
     setAmount('');
     setBalance(user.balance);
-  }, [open]);
+  }, [open, user]);
 
   const handleChangeAmount = ({ target: { value } }) => {
     if (!isNaN(value)) setAmount(value.trim());
