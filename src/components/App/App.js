@@ -142,6 +142,7 @@ function App() {
           user={selectedUser}
           handleOpenCreateUserModal={handleOpenCreateUserModal}
           handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+          handleReloadUsers={handleGetUsers}
         />
         <DeleteUserModal
           open={openDeleteUserModal}

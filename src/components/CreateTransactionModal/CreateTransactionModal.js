@@ -23,6 +23,7 @@ CreateTransactionModal.propTypes = {
   user: PropTypes.object,
   handleOpenCreateUserModal: PropTypes.func,
   handleOpenDeleteUserModal: PropTypes.func.isRequired,
+  handleReloadUsers: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -63,6 +64,7 @@ function CreateTransactionModal({
   user,
   handleOpenCreateUserModal,
   handleOpenDeleteUserModal,
+  handleReloadUsers,
 }) {
   const classes = useStyles();
   const [amount, setAmount] = useState('');
@@ -82,6 +84,7 @@ function CreateTransactionModal({
       createTransaction(user.id, parseFloat(amount).toFixed(2) * multiplier)
         .then(() => getUserById(user.id))
         .then(({ data }) => {
+          handleReloadUsers();
           setBalance(data.balance);
         });
     }

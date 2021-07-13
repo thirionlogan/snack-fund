@@ -13,6 +13,7 @@ import client from '../../client/client';
 
 describe('Create Trabsaction Modal', () => {
   const user = { id: 1, name: 'Rob', rank: 'A1C', balance: 1000 };
+  const handleReloadUsers = jest.fn();
   let handleClose, handleOpenCreateUserModal, handleOpenDeleteUserModal;
 
   beforeEach(() => {
@@ -33,6 +34,7 @@ describe('Create Trabsaction Modal', () => {
             handleClose={handleClose}
             handleOpenCreateUserModal={handleOpenCreateUserModal}
             handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+            handleReloadUsers={handleReloadUsers}
           />
         );
       });
@@ -95,6 +97,7 @@ describe('Create Trabsaction Modal', () => {
           handleClose={handleClose}
           handleOpenCreateUserModal={handleOpenCreateUserModal}
           handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+          handleReloadUsers={handleReloadUsers}
         />
       );
     });
