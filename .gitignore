@@ -111,6 +111,7 @@ dist
 
 # testing
 /coverage
+/reports
 
 # production
 /build

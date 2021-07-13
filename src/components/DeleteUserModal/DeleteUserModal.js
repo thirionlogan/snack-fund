@@ -11,6 +11,7 @@ DeleteUserModal.propTypes = {
   handleGetUsers: PropTypes.func.isRequired,
   handleCloseCreateTransactionModal: PropTypes.func.isRequired,
 };
+// possible stryker ignore with /.*\.propTypes.*=.*\{([^\}]|\n)*\}/
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: { margin: theme.spacing(1) },
 }));
+// note possible stryker ignore with /.*makeStyles\(\((.|\n)*\}\)\).*/
 
 function DeleteUserModal({
   open,
