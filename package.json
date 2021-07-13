@@ -75,7 +75,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "npm run test:unit",
+    "test:unit": "node scripts/test.js",
+    "test:mutate": "npx stryker run",
     "server": "node server/server.js",
     "migrate": "npx knex migrate:latest --knexfile ./server/knexfile.js",
     "rollback": "npx knex migrate:rollback --knexfile ./server/knexfile.js",
@@ -175,6 +177,8 @@
     ]
   },
   "devDependencies": {
+    "@stryker-mutator/core": "^5.1.1",
+    "@stryker-mutator/jest-runner": "^5.1.1",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-config-react-app": "^6.0.0",
