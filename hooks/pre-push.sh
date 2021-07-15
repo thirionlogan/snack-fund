@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 cd "$(git rev-parse --show-toplevel)" # go to top directory
 JEST="node_modules/.bin/jest" # get the jest executable
 pwd # print working directory
