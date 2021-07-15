@@ -51,16 +51,16 @@ function CreateUserModal({ open, handleClose, handleGetUsers, user }) {
     if (!isNaN(value) || value === '-') setAmount(value.trim());
   };
 
-  const handleChangeName = ({ target: { value } }) => setName(value.trim());
-  const handleChangeRank = ({ target: { value } }) => setRank(value.trim());
+  const handleChangeName = ({ target: { value } }) => setName(value);
+  const handleChangeRank = ({ target: { value } }) => setRank(value);
 
   const handleSubmit = () => {
     if (user.id && name && rank) {
-      updateUser(user.id, { name, rank })
+      updateUser(user.id, { name: name.trim(), rank: rank.trim() })
         .then(handleClose)
         .then(handleGetUsers);
     } else if (!isNaN(amount) && name && rank) {
-      createUser({ name, rank, balance: amount * 100 })
+      createUser({ name: name.trim(), rank: rank.trim(), balance: amount * 100 })
         .then(handleClose)
         .then(handleGetUsers);
     }
