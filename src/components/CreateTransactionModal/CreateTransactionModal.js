@@ -76,7 +76,7 @@ function CreateTransactionModal({
   }, [open, user]);
 
   const handleChangeAmount = ({ target: { value } }) => {
-    if (!isNaN(value)) setAmount(value.trim());
+    if (!isNaN(value) || value === ".") setAmount(value.trim());
   };
 
   const handleSubmit = (multiplier) => {

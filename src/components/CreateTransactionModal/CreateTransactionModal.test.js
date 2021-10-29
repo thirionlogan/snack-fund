@@ -69,6 +69,14 @@ describe('Create Trabsaction Modal', () => {
       expect(amountText).toBeInTheDocument();
     });
 
+    it('should allow the character . as a valid first character', () => {
+      const amountInput = screen.getByRole('textbox');
+
+      fireEvent.change(amountInput, { target: { value: '.' } });
+
+      expect(amountInput.value).toBe(".");
+    });
+
     it('should not create an incorrect transaction', async () => {
       const messageText = screen.getByText('You have');
       const amountText = screen.getByText(/\$10\.00/i);
