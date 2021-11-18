@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Paper, Modal, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Paper, Modal, TextField } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 

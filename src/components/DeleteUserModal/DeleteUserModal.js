@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Paper, Modal, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Paper, Modal, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import { deleteUser } from '../../client/client';
 
@@ -82,11 +82,9 @@ function DeleteUserModal({
           </Button>
           <Button
             variant="contained"
-            color="default"
             size="large"
             className={classes.button}
-            onClick={handleClose}
-          >
+            onClick={handleClose}>
             Cancel
           </Button>
         </div>

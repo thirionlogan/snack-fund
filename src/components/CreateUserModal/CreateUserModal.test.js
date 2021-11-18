@@ -4,6 +4,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import CreateUserModal from './CreateUserModal';
 import client from '../../client/client';
+import ThemeWrapper from '../ThemeWrapper/ThemeWrapper'
 
 describe('Create User Modal', () => {
   let handleClose, handleGetUsers;
@@ -18,12 +19,14 @@ describe('Create User Modal', () => {
   describe('When creating a new user', () => {
     beforeEach(() => {
       render(
-        <CreateUserModal
-          open={true}
-          handleClose={handleClose}
-          handleGetUsers={handleGetUsers}
-          user={{}}
-        />
+        <ThemeWrapper>
+          <CreateUserModal
+            open={true}
+            handleClose={handleClose}
+            handleGetUsers={handleGetUsers}
+            user={{}}
+          />
+        </ThemeWrapper>
       );
     });
 
@@ -78,13 +81,13 @@ describe('Create User Modal', () => {
 
   describe('When editing an existing user', () => {
     beforeEach(() => {
-      render(
+      render(<ThemeWrapper>
         <CreateUserModal
           open={true}
           handleClose={handleClose}
           handleGetUsers={handleGetUsers}
           user={{ id: 1, name: 'Shawesome', rank: 'SrA' }}
-        />
+        /></ThemeWrapper>
       );
     });
 

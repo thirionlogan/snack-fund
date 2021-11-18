@@ -12,6 +12,7 @@ import {
 } from '@testing-library/react';
 import App from './App';
 import client from '../../client/client';
+import ThemeWrapper from '../ThemeWrapper/ThemeWrapper'
 
 describe('App', () => {
   beforeEach(() => {
@@ -32,7 +33,11 @@ describe('App', () => {
       },
     });
     act(() => {
-      render(<App />);
+      render(
+        <ThemeWrapper>
+          <App />
+        </ThemeWrapper>
+      );
     });
   });
 

@@ -5,9 +5,9 @@ import {
   Modal,
   TextField,
   InputAdornment,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import SaveIcon from '@material-ui/icons/Save';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import SaveIcon from '@mui/icons-material/Save';
 import PropTypes from 'prop-types';
 import { createUser, updateUser } from '../../client/client';
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Paper, InputBase, Fab } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-import DescriptionIcon from '@material-ui/icons/Description';
+import makeStyles from '@mui/styles/makeStyles';
+import { Button, Paper, InputBase, Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
+import DescriptionIcon from '@mui/icons-material/Description';
 import CreateUserModal from '../CreateUserModal/CreateUserModal';
 import CreateTransactionModal from '../CreateTransactionModal/CreateTransactionModal';
 import DeleteUserModal from '../DeleteUserModal/DeleteUserModal';

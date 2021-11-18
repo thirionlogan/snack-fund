@@ -4,6 +4,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DeleteUserModal from './DeleteUserModal';
 import client from '../../client/client';
+import ThemeWrapper from '../ThemeWrapper/ThemeWrapper'
 
 describe('Delete User Modal', () => {
   let handleClose, handleGetUsers, handleCloseCreateTransactionModal;
@@ -21,13 +22,15 @@ describe('Delete User Modal', () => {
     client.deleteUser = jest.fn().mockResolvedValue(undefined);
 
     render(
-      <DeleteUserModal
-        open={true}
-        handleClose={handleClose}
-        user={user}
-        handleGetUsers={handleGetUsers}
-        handleCloseCreateTransactionModal={handleCloseCreateTransactionModal}
-      />
+      <ThemeWrapper>
+        <DeleteUserModal
+          open={true}
+          handleClose={handleClose}
+          user={user}
+          handleGetUsers={handleGetUsers}
+          handleCloseCreateTransactionModal={handleCloseCreateTransactionModal}
+        />
+      </ThemeWrapper>
     );
   });
   it('should delete user when delete is clicked', async () => {

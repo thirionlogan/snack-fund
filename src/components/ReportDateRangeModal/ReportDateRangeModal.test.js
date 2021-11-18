@@ -5,6 +5,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import ReportDateRangeModal from './ReportDateRangeModal';
 import moment from 'moment';
 import client from '../../client/client';
+import ThemeWrapper from '../ThemeWrapper/ThemeWrapper'
 
 describe('ReportDateRangeModal', () => {
   let handleClose;
@@ -12,7 +13,7 @@ describe('ReportDateRangeModal', () => {
   beforeEach(() => {
     client.getReport = jest.fn().mockResolvedValue(undefined);
     handleClose = jest.fn().mockResolvedValue(undefined);
-    render(<ReportDateRangeModal open={true} handleClose={handleClose} />);
+    render(<ThemeWrapper><ReportDateRangeModal open={true} handleClose={handleClose} /></ThemeWrapper>);
   });
 
   it('should select dates and pull correct report period', () => {

@@ -8,12 +8,12 @@ import {
   Tooltip,
   InputAdornment,
   Typography,
-} from '@material-ui/core';
-import TrendingDownIcon from '@material-ui/icons/TrendingDown';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import { createTransaction, getUserById } from '../../client/client';
 
@@ -109,15 +109,12 @@ function CreateTransactionModal({
           </Typography>
           <div>
             <Tooltip title="Edit Account" placement="top" arrow>
-              <IconButton aria-label="edit" onClick={handleOpenCreateUserModal}>
+              <IconButton aria-label="edit" onClick={handleOpenCreateUserModal} size="large">
                 <EditIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title="Delete Account" placement="top" arrow>
-              <IconButton
-                aria-label="delete"
-                onClick={handleOpenDeleteUserModal}
-              >
+              <IconButton aria-label="delete" onClick={handleOpenDeleteUserModal} size="large">
                 <DeleteIcon />
               </IconButton>
             </Tooltip>

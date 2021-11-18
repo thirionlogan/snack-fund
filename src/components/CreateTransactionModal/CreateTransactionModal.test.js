@@ -10,6 +10,7 @@ import {
 } from '@testing-library/react';
 import CreateTransactionModal from './CreateTransactionModal';
 import client from '../../client/client';
+import ThemeWrapper from '../ThemeWrapper/ThemeWrapper'
 
 describe('Create Trabsaction Modal', () => {
   const user = { id: 1, name: 'Rob', rank: 'A1C', balance: 1000 };
@@ -28,14 +29,16 @@ describe('Create Trabsaction Modal', () => {
     beforeEach(async () => {
       await act(() => {
         render(
-          <CreateTransactionModal
-            open={true}
-            user={user}
-            handleClose={handleClose}
-            handleOpenCreateUserModal={handleOpenCreateUserModal}
-            handleOpenDeleteUserModal={handleOpenDeleteUserModal}
-            handleReloadUsers={handleReloadUsers}
-          />
+          <ThemeWrapper>
+            <CreateTransactionModal
+              open={true}
+              user={user}
+              handleClose={handleClose}
+              handleOpenCreateUserModal={handleOpenCreateUserModal}
+              handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+              handleReloadUsers={handleReloadUsers}
+            />
+          </ThemeWrapper>
         );
       });
     });
@@ -98,7 +101,7 @@ describe('Create Trabsaction Modal', () => {
 
   describe('When there is no selected user', () => {
     beforeEach(() => {
-      render(
+      render(<ThemeWrapper>
         <CreateTransactionModal
           open={true}
           user={{}}
@@ -106,7 +109,7 @@ describe('Create Trabsaction Modal', () => {
           handleOpenCreateUserModal={handleOpenCreateUserModal}
           handleOpenDeleteUserModal={handleOpenDeleteUserModal}
           handleReloadUsers={handleReloadUsers}
-        />
+        /></ThemeWrapper>
       );
     });
     it('should not load', () => {
@@ -119,14 +122,14 @@ describe('Create Trabsaction Modal', () => {
       client.getUserById = jest
         .fn()
         .mockResolvedValueOnce({ data: { ...user, balance: -1000 } });
-      render(
+      render(<ThemeWrapper>
         <CreateTransactionModal
           open={true}
           user={{ ...user, balance: -1000 }}
           handleClose={handleClose}
           handleOpenCreateUserModal={handleOpenCreateUserModal}
           handleOpenDeleteUserModal={handleOpenDeleteUserModal}
-        />
+        /></ThemeWrapper>
       );
     });
     it('should deposit amount', async () => {
