@@ -36,14 +36,13 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    margin: '0 8px',
   },
   paper: {
     position: 'absolute',
     width: 400,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2),
     top: `50%`,
     left: `50%`,
     transform: `translate(-50%, -50%)`,
@@ -55,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  textField: { margin: theme.spacing(1) },
+  textField: { margin: theme.spacing(1, 0) },
   typography: { display: 'flex' },
 }));
 
@@ -102,25 +101,26 @@ function CreateTransactionModal({
     >
       <Paper className={classes.paper}>
         <div className={classes.upperControls}>
-          <Typography className={classes.typography}>
-            You have{' '}
-            <Typography component="span" className={balanceColor()}>
-              {open && <CountUp end={balance / 100} prefix='$' duration={2} decimals='2' preserveValue useEasing />}
-            </Typography>
-          </Typography>
+        <Typography variant="h6" fontWeight={300} display="flex" >Hello&nbsp;<Typography variant="h6" leftMargin='1em'>{`${user.rank} ${user.name}!`}</Typography></Typography>
           <div>
             <Tooltip title="Edit Account" placement="top" arrow>
-              <IconButton aria-label="edit" onClick={handleOpenCreateUserModal} size="large">
+              <IconButton aria-label="edit" onClick={handleOpenCreateUserModal} color="primary" size="large" >
                 <EditIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title="Delete Account" placement="top" arrow>
-              <IconButton aria-label="delete" onClick={handleOpenDeleteUserModal} size="large">
+              <IconButton aria-label="delete" onClick={handleOpenDeleteUserModal} color="primary" size="large" >
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
           </div>
         </div>
+        <Typography className={classes.typography}>
+            You have&nbsp;
+            <Typography component="span" className={balanceColor()}>
+              {open && <CountUp end={balance / 100} prefix='$' duration={0.5} decimals='2' preserveValue useEasing />}
+            </Typography>
+          </Typography>
         <TextField
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
