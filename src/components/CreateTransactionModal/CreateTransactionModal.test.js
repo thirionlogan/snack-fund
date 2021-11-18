@@ -45,7 +45,7 @@ describe('Create Transaction Modal', () => {
 
     it('should deposit amount', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = await screen.findByText(/\$10\.00/i, {}, { timeout: 2500 });
+      const amountText = await screen.findByText(/\$10\.00/i);
       const amountInput = screen.getByRole('textbox');
       const depositButton = screen.getByRole('button', { name: /deposit/i });
 
@@ -60,7 +60,7 @@ describe('Create Transaction Modal', () => {
 
     it('should withdraw amount', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = await screen.findByText(/\$10\.00/i, {}, { timeout: 2500 });
+      const amountText = await screen.findByText(/\$10\.00/i);
       const amountInput = screen.getByRole('textbox');
       const withdrawButton = screen.getByRole('button', { name: /withdraw/i });
 
@@ -82,7 +82,7 @@ describe('Create Transaction Modal', () => {
 
     it('should not create an incorrect transaction', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = await screen.findByText(/\$10\.00/i, {}, { timeout: 2500 });
+      const amountText = await screen.findByText(/\$10\.00/i);
       const depositButton = screen.getByRole('button', { name: /deposit/i });
       const withdrawButton = screen.getByRole('button', { name: /withdraw/i });
 
@@ -137,7 +137,7 @@ describe('Create Transaction Modal', () => {
     });
     it('should deposit amount', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = await screen.findByText(/-\$10\.00/i, {}, { timeout: 2500 });
+      const amountText = await screen.findByText(/-\$10\.00/i);
 
       await waitFor(() =>
         Promise.all([
