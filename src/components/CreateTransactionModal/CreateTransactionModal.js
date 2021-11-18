@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import { createTransaction, getUserById } from '../../client/client';
+import CountUp from 'react-countup'
 
 CreateTransactionModal.propTypes = {
   open: PropTypes.bool.isRequired,
@@ -104,7 +105,7 @@ function CreateTransactionModal({
           <Typography className={classes.typography}>
             You have{' '}
             <Typography component="span" className={balanceColor()}>
-              ${(balance / 100).toFixed(2)}
+              {open && <CountUp end={balance / 100} prefix='$' duration={2} decimals='2' preserveValue useEasing />}
             </Typography>
           </Typography>
           <div>

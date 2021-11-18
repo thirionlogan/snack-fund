@@ -12,7 +12,7 @@ import CreateTransactionModal from './CreateTransactionModal';
 import client from '../../client/client';
 import ThemeWrapper from '../ThemeWrapper/ThemeWrapper'
 
-describe('Create Trabsaction Modal', () => {
+describe('Create Transaction Modal', () => {
   const user = { id: 1, name: 'Rob', rank: 'A1C', balance: 1000 };
   const handleReloadUsers = jest.fn();
   let handleClose, handleOpenCreateUserModal, handleOpenDeleteUserModal;
@@ -43,9 +43,9 @@ describe('Create Trabsaction Modal', () => {
       });
     });
 
-    it('should deposit amount', () => {
+    it('should deposit amount', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = screen.getByText(/\$10\.00/i);
+      const amountText = await screen.findByText(/\$10\.00/i, {}, { timeout: 2500 });
       const amountInput = screen.getByRole('textbox');
       const depositButton = screen.getByRole('button', { name: /deposit/i });
 
@@ -58,9 +58,9 @@ describe('Create Trabsaction Modal', () => {
       expect(client.createTransaction).toBeCalledWith(1, 500);
     });
 
-    it('should withdraw amount', () => {
+    it('should withdraw amount', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = screen.getByText(/\$10\.00/i);
+      const amountText = await screen.findByText(/\$10\.00/i, {}, { timeout: 2500 });
       const amountInput = screen.getByRole('textbox');
       const withdrawButton = screen.getByRole('button', { name: /withdraw/i });
 
@@ -82,7 +82,7 @@ describe('Create Trabsaction Modal', () => {
 
     it('should not create an incorrect transaction', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = screen.getByText(/\$10\.00/i);
+      const amountText = await screen.findByText(/\$10\.00/i, {}, { timeout: 2500 });
       const depositButton = screen.getByRole('button', { name: /deposit/i });
       const withdrawButton = screen.getByRole('button', { name: /withdraw/i });
 
@@ -122,19 +122,22 @@ describe('Create Trabsaction Modal', () => {
       client.getUserById = jest
         .fn()
         .mockResolvedValueOnce({ data: { ...user, balance: -1000 } });
-      render(<ThemeWrapper>
-        <CreateTransactionModal
-          open={true}
-          user={{ ...user, balance: -1000 }}
-          handleClose={handleClose}
-          handleOpenCreateUserModal={handleOpenCreateUserModal}
-          handleOpenDeleteUserModal={handleOpenDeleteUserModal}
-        /></ThemeWrapper>
+      render(
+        <ThemeWrapper>
+          <CreateTransactionModal
+            open={true}
+            user={{ ...user, balance: -1000 }}
+            handleClose={handleClose}
+            handleOpenCreateUserModal={handleOpenCreateUserModal}
+            handleOpenDeleteUserModal={handleOpenDeleteUserModal}
+            handleReloadUsers={handleReloadUsers}
+          />
+        </ThemeWrapper>
       );
     });
     it('should deposit amount', async () => {
       const messageText = screen.getByText('You have');
-      const amountText = screen.getByText(/\$-10\.00/i);
+      const amountText = await screen.findByText(/-\$10\.00/i, {}, { timeout: 2500 });
 
       await waitFor(() =>
         Promise.all([
